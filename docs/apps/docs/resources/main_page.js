@@ -17,7 +17,7 @@ Docs.mainPage = SC.Page.design({
     
     sidebar: SC.View.design({
       layout: { top:0, left:0, bottom:0, width:190 },
-      childViews: 'search classList'.w(),
+      childViews: 'search classList searchResultsList'.w(),
 
       search: SC.View.design({
         layout: { top:0, left:0, height:35, width:190 },
@@ -32,10 +32,23 @@ Docs.mainPage = SC.Page.design({
 
       classList: SC.ScrollView.design({
         layout: { top:35, left:0, bottom:0, width:190 },
+        isVisibleBinding: SC.Binding.not('Docs.searchController.isSearching'),
 
         contentView: Docs.MasterListView.design({
           contentBinding: 'Docs.classesController.arrangedObjects',
           selectionBinding: 'Docs.classesController.selection',
+          showAlternatingRows: YES,
+          contentValueKey: 'displayName'
+        })
+      }),
+
+      searchResultsList: SC.ScrollView.design({
+        layout: { top:35, left:0, bottom:0, width:190 },
+        isVisibleBinding: 'Docs.searchController.isSearching',
+
+        contentView: Docs.MasterListView.design({
+          contentBinding: 'Docs.searchController.arrangedObjects',
+          selectionBinding: 'Docs.searchController.selection',
           showAlternatingRows: YES,
           contentValueKey: 'displayName'
         })
