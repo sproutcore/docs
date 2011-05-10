@@ -91,18 +91,20 @@
 }
 
 #mainPane .data-type {
-  margin-right: 5px;
-  color:gray;
-  border-radius:4px;
-  background: #f3f3f3;
+  margin-right: 2px;
   padding:2px;
-  border:1px #ccc solid;
+  color: gray;
+  font-weight:bolder;
+}
+
+#mainPane .data-type.clickable:hover {
+  cursor: pointer;
+  text-decoration:underline !important;
 }
 
 #mainPane .data-type.clickable {
-
   color:blue;
-  text-decoration:underline;
+  text-decoration:none;
   /*border:1px #8E4602 solid;*/
   /*color:white;*/
   /*box-shadow: 0px 1px 2px #8E4602;*/
@@ -138,7 +140,8 @@
 }
 
 #mainPane #class-info ul {
-  margin-left:15px;
+  margin-left: 15px;
+  -webkit-padding-start: 0;
 }
 
 #mainPane #class-info li {
