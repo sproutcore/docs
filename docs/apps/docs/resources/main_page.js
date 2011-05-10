@@ -54,7 +54,7 @@ Docs.mainPage = SC.Page.design({
         className: SC.LabelView.design({
           layout: { centerY:0, left:10, right:0, height:27 },
           classNames: 'class-name'.w(),
-          valueBinding: 'Docs.selectedClassController.name',
+          valueBinding: 'Docs.selectedClassController.displayName',
           controlSize: SC.LARGE_CONTROL_SIZE
         })
       }),
