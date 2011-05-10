@@ -13,8 +13,9 @@
   @extends SC.Object
   @since SproutCore 1.5
 */
-Docs.searchController = SC.Object.create({
+Docs.searchController = SC.ArrayController.create({
   searchQuery: '',
+  isSearching: NO,
 
   runQuery: function(sender){
     this._runSearch(sender.get('value'));
@@ -22,24 +23,49 @@ Docs.searchController = SC.Object.create({
 
   queryDidChange: function(){
     var query = this.get('searchQuery');
-    if (!query) {
+    if (!query.length) {
       this._clearSearch();
     }
 
-    this._runSearch(query);
+    var that = this;
+    this.invokeLater(function() {
+      that._runSearch(query);
+    });
 
   }.observes('searchQuery'),
 
+  _selectionDidChange: function(){
+
+    var content = this.getPath('selection.firstObject');
+
+    if(content) {
+      var belongsTo = content.get('symbolBelongsTo');
+      if (belongsTo) {
+
+        var sel = SC.SelectionSet.create();
+        sel.addObjects([content]).freeze();
+        Docs.selectedClassController.set('symbolSelection',sel);
+        
+        content = Docs.store.materializeRecord(belongsTo);
+      }
+      Docs.selectedClassController.set('content',content);
+      SC.routes.set('location',content.get('displayName'));
+    }
+
+  }.observes('selection'),
+
   _clearSearch: function(){
-      Docs.classesController.set('content',Docs.allClassesRecordArray);
+    this.set('isSearching',NO);
   },
 
   _runSearch: function(query){
+    this.set('isSearching',YES);
 
     var matches = this._findMatchesForQuery(query);
 
     if (matches) {
-      Docs.classesController.set('content',matches);
+      console.log('matches = ',matches);
+      this.set('content',matches);
     }
   },
 
@@ -51,9 +77,16 @@ Docs.searchController = SC.Object.create({
     // Go through every symbol, try to match the name of the class first
     for(var name in indexHash){
 
-      if (name.indexOf(query) !== -1) {
-        var storeObject = Docs.store.materializeRecord(indexHash[name]);
-        classMatches.push(storeObject);
+      if (indexHash.hasOwnProperty(name) && name.indexOf(query) !== -1) {
+        var arr = indexHash[name];
+
+        for(var i = 0, len = arr.length; i < len; i++) {
+          var obj = arr[i];
+          var storeObject = Docs.store.materializeRecord(obj.value);
+
+          storeObject.set('symbolBelongsTo',obj.parent);
+          classMatches.push(storeObject);
+        }
       }
     };
 
