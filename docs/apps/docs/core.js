@@ -81,14 +81,45 @@ Docs = SC.Application.create(
 
   buildIndex: function(/** SC.RecordArray */classes) {
     var hash = {};
+    var that = this;
 
     classes.forEach(function(object, index){
       var name = object.get('displayName');
 
-      hash[name] = object.get('storeKey');
+      hash[name] = [{
+        value: object.get('storeKey'),
+        parent: null
+      }];
+
+      var properties = object.get('properties');
+      that._indexSymbols(hash,properties,object);
+
+      var methods = object.get('methods');
+      that._indexSymbols(hash,methods,object);
     });
 
     this.set('indexHash',hash);
+  },
+
+  _indexSymbols: function(hash,symbols,parent) {
+    symbols.forEach(function(symbol, index) {
+      var name = symbol.get('displayName');
+      var existing = hash[name];
+
+      var methodHash = {
+        value: symbol.get('storeKey'),
+        parent: parent.get('storeKey')
+      };
+
+      if (existing) {
+        existing.push(methodHash);
+      } 
+      else {
+        existing = [methodHash]; 
+      }
+
+      hash[name] = existing;
+    });
   },
 
   /** record array representing all the classes */
