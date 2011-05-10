@@ -19,6 +19,7 @@ Docs.classesController = SC.ArrayController.create(
     var content = this.getPath('selection.firstObject');
 
     if(content) {
+      Docs.selectedClassController.set('content',content);
       SC.routes.set('location',content.get('displayName'));
     }
 

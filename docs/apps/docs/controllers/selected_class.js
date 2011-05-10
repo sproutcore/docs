@@ -16,7 +16,6 @@ sc_require('resources/jquery_ui');
 Docs.selectedClassController = SC.ObjectController.create(
 /** @scope Docs.selectedClassController.prototype */ {
 
-  contentBinding: SC.Binding.single('Docs.classesController.selection'),
   nameBinding: SC.Binding.oneWay('.content.displayName'),
 
   symbolSelection: null,
