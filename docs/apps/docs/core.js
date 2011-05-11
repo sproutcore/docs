@@ -63,19 +63,6 @@ Docs = SC.Application.create(
   /**
     A hash used to quickly inspect all the data associated with the doc viewer.
 
-    ex. 
-
-    {
-      "SC.Set": [
-        "add", 
-        "edit"
-      ],
-
-      "SC.Enumerable": [
-        "find", 
-        "findProperty"
-      ]
-    }
   */
   indexHash: null,
 
@@ -111,7 +98,7 @@ Docs = SC.Application.create(
         parent: parent.get('storeKey')
       };
 
-      if (existing) {
+      if (existing && SC.typeOf(existing) === SC.T_ARRAY) {
         existing.push(methodHash);
       } 
       else {
