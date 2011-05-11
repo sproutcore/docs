@@ -1,12 +1,6 @@
-.svn
-*.DS_Store*
-Gemfile.lock
 tmp
-log
-public´
-*.cache
-.sass-cache
-*.swp
-tags
-*.orig
-*.tbz
+.DS_Store
+.bundle
+bin/
+class.js
+docs/frameworks/
