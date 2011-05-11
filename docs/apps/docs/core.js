@@ -61,12 +61,27 @@ Docs = SC.Application.create(
   },
 
   /**
-    A hash used to quickly inspect all the data associated with the doc viewer.
+    A hash used to match symbol names to the classes they belong to.
+
+    A single name can map to more than one class. For instance, if SC.View
+    has a 'childViews' property but so does MyRandomThingy, the childViews
+    property will be mapped to both.
+
+    This is built as part of the buildIndex method.
 
   */
   indexHash: null,
 
+  /**
+    An array of symbol names used to quickly iterate and search over the
+    symbols. This array contains the keys of the indexHash. We separate it
+    for performance: iterating over an array is much faster than iterating
+    over the keys in a hash.
+  */
+  indexArray: null,
+
   buildIndex: function(/** SC.RecordArray */classes) {
+    // first, build the hash.
     var hash = {};
     var that = this;
 
@@ -86,6 +101,15 @@ Docs = SC.Application.create(
     });
 
     this.set('indexHash',hash);
+
+    // one time only, we'll iterate over the keys in the hash
+    // we just created, to generate the ultra-fast array index:
+    var indexArray = [];
+    for (var symbolName in hash) { 
+      if (hash.hasOwnProperty(symbolName)) { indexArray.push(symbolName); } 
+    }
+
+    this.set('indexArray', indexArray.sort());
   },
 
   _indexSymbols: function(hash,symbols,parent) {
