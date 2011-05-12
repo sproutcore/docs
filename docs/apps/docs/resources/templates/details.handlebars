@@ -1,19 +1,10 @@
-<div id="class-details">
-  {{#if content.extendsFrom}}
-    <div class="extends">
-      <span class="name">Extends:</span>
-      <span class="value">{{extends content.extendsFrom}}</span>
-    </div>
-  {{/if}}
-  {{#if content.since}}
-    <div class="since">
-      <span class="name">Since:</span>
-      <span class="value">{{content.since}}</span>
-    </div>
-  {{/if}}
-</div>
-
 <div id="class-info">
+
+  <h1 class="class-name">{{content.displayName}}</h2>
+  <div class="class-metadata">
+    <span class="name">Extends:</span>
+    <span class="value">{{content.extendsFrom}}</span>
+  </div>
 
   {{#if content.formattedOverview}}
     <h2 class="section-header"> Overview </h2>

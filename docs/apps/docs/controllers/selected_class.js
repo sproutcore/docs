@@ -109,18 +109,12 @@ Docs.selectedClassController = SC.ObjectController.create(
 
       this.innerHTML = this.innerHTML.replace(regex,function(str, p1){ return '<span name="'+p1+'" class="data-type">'+p1+'</span>'; });
     })
-
-    //overviews.each(function() {
-      //var regex = /\b(\w+\.\w+)\b/g;
-
-      //this.innerHTML = this.innerHTML.replace(regex,function(str, p1){ return '<span name="'+p1+'" class="data-type">'+p1+'</span>'; });
-    //})
   },
 
   _updateDataTypeButtons: function() {
 
     var that = this;
-    var dataTypes = SC.$('.class-detail .data-type');
+    var dataTypes = SC.$('.detail-view .data-type');
     var curClassName = that.getPath('content.displayName');
     var symbols = this.get('symbols');
 

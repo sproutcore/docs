@@ -7,9 +7,48 @@
 */
 #mainPane {
   font-family: "Helvetica Neue", "Helvetica", Verdana;
+
+  & .class-header {
+    background: #e1e7ee;
+    border-bottom: 1px #a8b0ba solid;
+    z-index: 4;
+
+    & .class-name {
+      font-weight:bolder;
+      font-size:25px;
+    }
+  }
+
+  & .symbol-list {
+    background: #eef3f6;
+  }
 }
 
-#mainPane .class-detail {
+#mainPane #class-header {
+
+  position: absolute;
+  top:0; 
+  left:0; 
+  right:0; 
+  height:50px;
+
+  & h1 {
+    font-size: 1.7em;
+  }
+
+  & .extendsFrom {
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+
+    height: 30px;
+    right: 20px;
+    font-size: 1.3em;
+  }
+}
+
+#mainPane #class-info {
+
   position: absolute;
   top:0;
   left:190px;
@@ -19,135 +58,119 @@
   overflow:auto;
   font-size:14px;
   -webkit-user-select: text;
-}
-
-#mainPane .class-detail #class-details {
-  background: #f2f2f2;
-  border-bottom: 1px #cccccc solid;
-  padding:15px 15px 0 15px;
-}
-
-#mainPane .class-detail #class-details .extends .name,
-#mainPane .class-detail #class-details .since .name {
-  font-weight:bolder;
-}
-
-#mainPane .class-detail #class-details .extends,
-#mainPane .class-detail #class-details .since {
-  margin-bottom:15px;
-}
-
-#mainPane .class-detail #class-info {
   padding: 20px;
-  font-size:0.9em;
+  font-size:1em;
+
+  & .class-name {
+    font-size:2em;
+  }
+
+  & .class-metadata {
+    margin-bottom:15px;
+
+    & .name {
+      font-weight:bolder;
+    }
+  }
+  
+  & h1 {
+    font-size: 1.5em;
+  }
+
+  & h2 {
+    color: #2b4270;
+    margin-bottom:10px;
+    font-size: 1.3em;
+  }
+
+  & hr {
+    border: none;
+    background:#a8b0ba;
+    height: 1px;
+    margin:15px 0;
+  }
+
+  & ul {
+    margin:0;
+  }
+
+  & .data-type {
+    margin-right: 2px;
+    padding:2px;
+    color: gray;
+    font-weight:bolder;
+  }
+
+  & .data-type.clickable:hover {
+    cursor: pointer;
+    text-decoration:underline !important;
+  }
+
+  & .data-type.clickable {
+    color:blue;
+    text-decoration:none;
+  }
+
+
+  & .method-signature {
+    font-weight:bolder;
+  }
+
+  & .returns {
+    margin-left: 15px;
+  }
+
+  & .returns .name {
+    /*color: gray;*/
+    font-weight:bolder;
+  }
+
+  & .subtitles {
+    color: gray;
+    margin-bottom:5px;
+    margin-left:15px;
+  }
+
+  & .subtitles .name {
+    font-weight:bolder;
+  }
+
+  & .subtitles .value {
+
+  }
+
+  & .overview {
+    margin-left:15px;
+    margin-bottom:15px;
+  }
+
+  & .header {
+    font-weight:bolder;
+    margin-bottom:10px;
+
+  }
+
+  & ul {
+    margin-left: 15px;
+    -webkit-padding-start: 0;
+  }
+
+  & li {
+    list-style: circle;
+  }
+
+  & li.symbol {
+    list-style: none;
+  }
+
+  & p {
+    -webkit-margin-before: 0;
+  }
+
+  & pre {
+    background: #E1EBF2;
+    padding:5px;
+    overflow:auto
+  }
 }
 
-#mainPane .class-detail #class-info h2 {
-  color: #2b4270;
-  margin-bottom:10px;
-}
-
-#mainPane .class-header {
-  background: #e1e7ee;
-  border-bottom: 1px #a8b0ba solid;
-  z-index: 4;
-}
-
-#mainPane .class-header .class-name {
-  font-weight:bolder;
-  font-size:25px;
-}
-
-#mainPane .symbol-list {
-  background: #eef3f6;
-}
-
-#mainPane #class-info .subtitles {
-  color: gray;
-  margin-bottom:5px;
-  margin-left:15px;
-}
-
-#mainPane #class-info .subtitles .name {
-  font-weight:bolder;
-}
-
-#mainPane #class-info .subtitles .value {
-
-}
-
-#mainPane #class-info .overview {
-  margin-left:15px;
-  margin-bottom:15px;
-}
-
-#mainPane #class-info .header {
-  font-weight:bolder;
-  margin-bottom:10px;
-
-}
-
-#mainPane ul {
-  margin:0;
-}
-
-#mainPane .data-type {
-  margin-right: 2px;
-  padding:2px;
-  color: gray;
-  font-weight:bolder;
-}
-
-#mainPane .data-type.clickable:hover {
-  cursor: pointer;
-  text-decoration:underline !important;
-}
-
-#mainPane .data-type.clickable {
-  color:blue;
-  text-decoration:none;
-}
-
-
-#mainPane .method-signature {
-  font-weight:bolder;
-}
-
-#mainPane #class-info hr {
-  border: none;
-  background:#a8b0ba;
-  height: 1px;
-  margin:15px 0;
-}
-
-#mainPane #class-info .returns {
-  margin-left: 15px;
-}
-
-#mainPane #class-info .returns .name {
-  /*color: gray;*/
-  font-weight:bolder;
-}
-
-#mainPane #class-info ul {
-  margin-left: 15px;
-  -webkit-padding-start: 0;
-}
-
-#mainPane #class-info li {
-  list-style: circle;
-}
-
-#mainPane #class-info li.symbol {
-  list-style: none;
-}
-
-#mainPane #class-info p {
-  -webkit-margin-before: 0;
-}
-
-#mainPane #class-info pre {
-  background: #E1EBF2;
-  padding:5px;
-  overflow:auto
-}

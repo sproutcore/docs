@@ -50,8 +50,6 @@ Docs = SC.Application.create(
 
     if (min === Infinity || min === 0) return string;
 
-    console.log('min is ',min);
-
     // The first line is always free of any leading whitespace
     for (i = 1; i<len; i++) {
       splitString[i] = splitString[i].substr(min);
