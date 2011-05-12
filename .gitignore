@@ -2,5 +2,5 @@ tmp
 .DS_Store
 .bundle
 bin/
-class.js
+*class.js
 docs/frameworks/
