@@ -90,7 +90,8 @@ Docs = SC.Application.create(
 
       hash[name] = [{
         value: object.get('storeKey'),
-        parent: null
+        parent: null,
+        displayName: name
       }];
 
       var properties = object.get('properties');
@@ -106,7 +107,20 @@ Docs = SC.Application.create(
     // we just created, to generate the ultra-fast array index:
     var indexArray = [];
     for (var symbolName in hash) { 
-      if (hash.hasOwnProperty(symbolName)) { indexArray.push(symbolName); } 
+      if (hash.hasOwnProperty(symbolName)) { 
+        var pIdx = symbolName.indexOf("#"),
+            name = '', className = '';
+
+        if (pIdx < 0) pIdx = symbolName.length;
+        className = symbolName.substr(0, pIdx);
+        name = symbolName.substr(pIdx + 1);
+
+        indexArray.push({
+          fullName: symbolName,
+          className: className,
+          name: name
+        }); 
+      } 
     }
 
     this.set('indexArray', indexArray.sort());
@@ -119,7 +133,8 @@ Docs = SC.Application.create(
 
       var methodHash = {
         value: symbol.get('storeKey'),
-        parent: parent.get('storeKey')
+        parent: parent.get('storeKey'),
+        displayName: symbol.get('displayName')
       };
 
       if (existing && SC.typeOf(existing) === SC.T_ARRAY) {

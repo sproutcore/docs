@@ -34,11 +34,27 @@ Docs.searchController = SC.ArrayController.create({
 
   }.observes('searchQuery'),
 
-  _selectionDidChange: function(){
+  // the action we take when the selection changes takes awhile. So, we'll
+  // delay it until 250ms after the last change in selection.
+  _selectionDidChange: function() {
+    if (this._willPropagateSelectionChange) {
+      this._willPropagateSelectionChange.invalidate();
+    }
 
-    var content = this.getPath('selection.firstObject');
+    this._willPropagateSelectionChange = this.invokeLater('_propagateSelectionChange', 250);
+  }.observes('selection'),
+  
+  _propagateSelectionChange: function(){
+    this._willPropagateSelectionChange = NO;
 
-    if(content) {
+    var item = this.getPath('selection.firstObject');
+
+    if(item) {
+      // the search contains just plain SC Objects; we must get the
+      // actual record corresponding to the selected object.
+      var content = Docs.store.materializeRecord(item.get('storeKey'));
+      content.set('symbolBelongsTo', item.get('parentStoreKey'));
+
       var belongsTo = content.get('symbolBelongsTo');
       if (belongsTo) {
 
@@ -52,7 +68,7 @@ Docs.searchController = SC.ArrayController.create({
       SC.routes.set('location',content.get('displayName'));
     }
 
-  }.observes('selection'),
+  },
 
   _clearSearch: function(){
     this.set('isSearching',NO);
@@ -64,7 +80,7 @@ Docs.searchController = SC.ArrayController.create({
     var matches = this._findMatchesForQuery(query);
 
     if (matches) {
-      this.set('content',matches);
+      this.set('content', matches);
     }
   },
 
@@ -81,18 +97,19 @@ Docs.searchController = SC.ArrayController.create({
     The algorithms should be in order of priority. The search results will be sorted in this order.
   */
   searchAlgorithms: [
-    'searchBeginsWithInsensitive',
-    'searchMethodBeginsWithInsensitive',
+    'nameBeginsWithCaseSensitive',
+    'classBeginsWithCaseSensitive',
+    'classContainsCaseSensitive',
+    'nameBeginsWith',
+    'classBeginsWith',
+    'nameContains',
+    'classContains'//,
+//    'fuzzy'
+    //'searchBeginsWithInsensitive',
+    //'searchMethodBeginsWithInsensitive',
     
-    //,
     //'searchContainsInsensitive'
-    // CONTAINS INSENSITIVE IS TOO SLOW, not because the search is slow, but because 
-    // the search matches way too many items, and the materializing of the records is,
-    // apparently, quite slow...
-    //
-    // I am not sure how to fix this.
 
-    'searchContains' // this is a bit better, but not much
   ],
 
   /**
@@ -102,7 +119,7 @@ Docs.searchController = SC.ArrayController.create({
     The goal is to match a variety of different circumstances, but at different priorities.
     For instance, matches in the middle of a string should be less preferred than matches
     at the beginning.
-
+)
     The algorithm is:
 
     - Call each search algorithm to create a bucket with all matching items.
@@ -123,15 +140,39 @@ Docs.searchController = SC.ArrayController.create({
     var matches = [];
     var indexArray = Docs.get('indexArray'), indexHash = Docs.get('indexHash');
     var algorithms = this.get('searchAlgorithms'), buckets = [];
-    var idx, len;
+    var idx, len, algorithmIdx, algorithmLen, algorithm, match;
 
+    // create buckets
     for (idx = 0, len = algorithms.length; idx < len; idx++) {
-      // the algorithms array contains a list of string method names 
-      // to call on ourselves
-      var algorithm = this[algorithms[idx]];
-      buckets.push(this._performAlgorithm(algorithm, query, indexArray));
+      var algorithmName = algorithms[idx];
+      buckets.push([]);
     }
 
+
+    for (idx = 0, len = indexArray.length; idx < len; idx++) {
+      // for each item we search through, call each search algorithm:
+      //
+      // the algorithms array contains a list of string method names 
+      // to call on ourselves
+      algorithmLen = algorithms.length;
+
+      for (algorithmIdx = 0; algorithmIdx < algorithmLen; algorithmIdx++) {
+        algorithm = this[algorithms[algorithmIdx]];
+
+        // the algorithms return search metadata. Capture it; if it exists,
+        // there was a match and we should add the search metadata to the
+        // search results.
+        match = algorithm.call(this, query, indexArray[idx]);
+
+        if (match) {
+          buckets[algorithmIdx].push(match);
+        }
+      }
+    }
+
+    // combine the contents of the buckets, in order, so we get
+    // results sorted by relevancy first, then by name (indexArray
+    // begins sorted by name)
     var included = {};
     for (idx = 0, len = buckets.length; idx < len; idx++) {
       var bucket = buckets[idx], matchLen, matchIdx;
@@ -144,14 +185,14 @@ Docs.searchController = SC.ArrayController.create({
       var relevance = (len - idx) / len;
 
       for (matchIdx = 0, matchLen = bucket.length; matchIdx < matchLen; matchIdx++) {
-        var match = bucket[matchIdx];
+        match = bucket[matchIdx];
 
         // add relevance to the search metadata
         match.searchRelevance = relevance;
 
         // only add to the final collection of matches IF it is not already included
-        if (!included[match.name]) {
-          included[match.name] = YES;
+        if (!included[match.fullName]) {
+          included[match.fullName] = YES;
           matches.push(match);
         }
       }
@@ -159,52 +200,51 @@ Docs.searchController = SC.ArrayController.create({
 
     var classMatches = [];
 
-    // Finally, materialize all records as necessary
+    // Finally, find all of the symbol/class combinations and create the final
+    // list of search results.
     for (idx = 0, len = matches.length; idx < len; idx++) {
-      // TODO: figure out what the heck to do with the metadata... I guess put
-      // it on the materialized records???
-      var name = matches[idx].name, symbols = indexHash[name];
+      match = matches[idx];
+      var name = match.fullName, symbols = indexHash[name],
+          symbolLen = symbols.length;
 
-      for (var symbolIdx = 0, symbolLen = symbols.length; symbolIdx < symbolLen; symbolIdx++) {
+      for (var symbolIdx = 0; symbolIdx < symbolLen; symbolIdx++) {
         var symbol = symbols[symbolIdx];
-        var storeObject = Docs.store.materializeRecord(symbol.value);
 
-        // add search metadata to the record; seems weird to put it here but I'm
-        // not sure where else to put it unless we create proxy objects...
-        storeObject.set('searchNameMarkup', matches[idx].searchNameMarkup);
+        // the search results consist of these custom items we create.
+        var res = SC.Object.create({
+          name: match.name,
+          searchNameMarkup: match.searchNameMarkup,
+          didMatchName: match.didMatchName,
 
+          className: match.className,
+          searchClassNameMarkup: match.searchClassNameMarkup,
+          didMatchClassName: match.didMatchClassName,
 
-        storeObject.set('symbolBelongsTo', symbol.parent);
-        classMatches.push(storeObject);
+          storeKey: symbol.value,
+          parentStoreKey: symbol.parent
+        });
+
+        classMatches.push(res);
       }
     }
 
     return classMatches;
   },
 
-  // _performAlgorithm loops over the items and calls the algorithm on each one.
-  _performAlgorithm: function(algorithm, query, names) {
-    var result = [];
-    var idx, len;
-    for (idx = 0, len = names.length; idx < len; idx++) {
-      var name = names[idx], matched;
-      matched = algorithm.call(this, query, name);
-
-      if (matched) {
-        result.push(matched);
-      }
-    }
-
-    return result;
-  },
-
-
   // 
   // SEARCH ALGORITHMS
   //
 
-  searchBeginsWith: function(query, name) {
-    if (name.indexOf(query) === 0) {
+  classBeginsWith: function(query, item, sensitive) {
+    var name = item.className, match;
+
+    if (!sensitive) {
+      match = (name.toLowerCase().indexOf(query.toLowerCase()) === 0);
+    } else {
+      match = (name.indexOf(query) === 0);
+    }
+
+    if (match) {
       // create the HTML-annotated version
       var nameMarkup = "<span class='search-begin-match'>";
       nameMarkup += name.substr(0, query.length);
@@ -212,8 +252,11 @@ Docs.searchController = SC.ArrayController.create({
       nameMarkup += name.substr(query.length);
 
       var metadata = {
-        name: name,
-        searchNameMarkup: nameMarkup
+        fullName: item.fullName,
+        name: item.name,
+        searchClassNameMarkup: nameMarkup,
+        searchNameMarkup: item.name,
+        didMatchClassName: YES
       };
 
       return metadata;
@@ -222,8 +265,21 @@ Docs.searchController = SC.ArrayController.create({
     }
   },
 
-  searchBeginsWithInsensitive: function(query, name) {
-    if (name.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+  classBeginsWithCaseSensitive: function(query, item) {
+    return this.classBeginsWith(query, item, YES);
+  },
+
+
+  nameBeginsWith: function(query, item, sensitive) {
+    var name = item.name;
+
+    if (!sensitive) {
+      match = (name.toLowerCase().indexOf(query.toLowerCase()) === 0);
+    } else {
+      match = (name.indexOf(query) === 0);
+    }
+
+    if (match) {
       // create the HTML-annotated version
       var nameMarkup = "<span class='search-begin-match'>";
       nameMarkup += name.substr(0, query.length);
@@ -231,8 +287,11 @@ Docs.searchController = SC.ArrayController.create({
       nameMarkup += name.substr(query.length);
 
       var metadata = {
-        name: name,
-        searchNameMarkup: nameMarkup
+        fullName: item.fullName,
+        name: item.name,
+        searchClassNameMarkup: item.className,
+        searchNameMarkup: nameMarkup,
+        didMatchName: YES
       };
 
       return metadata;
@@ -241,35 +300,19 @@ Docs.searchController = SC.ArrayController.create({
     }
   },
 
-  searchMethodBeginsWithInsensitive: function(query, name) {
-    var pIdx = name.indexOf("#");
-
-    if (pIdx < 0) { return; }
-
-    var stub = name.substr(0, pIdx + 1);
-    var searchName = name.substr(pIdx + 1);
-
-    if (searchName.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-      // create the HTML-annotated version
-      var nameMarkup = stub + "<span class='search-begin-match'>";
-      nameMarkup += searchName.substr(0, query.length);
-      nameMarkup += "</span>";
-      nameMarkup += searchName.substr(query.length);
-
-      var metadata = {
-        name: name,
-        searchNameMarkup: nameMarkup
-      };
-
-      return metadata;
-    } else {
-      return false;
-    }
+  nameBeginsWithCaseSensitive: function(query, item) {
+    return this.nameBeginsWith(query, item, YES);
   },
 
+  classContains: function(query, item, sensitive) {
+    var name = item.className;
+    var matchAt = -1;
 
-  searchContains: function(query, name) {
-    var matchAt = name.indexOf(query);
+    if (!sensitive) {
+      matchAt = name.toLowerCase().indexOf(query.toLowerCase());
+    } else {
+      matchAt = name.indexOf(query);
+    }
 
     if (matchAt !== -1) {
 
@@ -281,9 +324,13 @@ Docs.searchController = SC.ArrayController.create({
       nameMarkup += name.substr(matchAt + query.length);
 
       var metadata = {
-        name: name,
-        searchNameMarkup: nameMarkup
+        fullName: item.fullName,
+        name: item.name,
+        searchClassNameMarkup: nameMarkup,
+        searchNameMarkup: item.name,
+        didMatchClassName: YES
       };
+
 
       return metadata;
     } else {
@@ -291,7 +338,12 @@ Docs.searchController = SC.ArrayController.create({
     }
   },
 
-  searchContainsInsensitive: function(query, name) {
+  classContainsCaseSensitive: function(query, item) {
+    return this.classContains(query, item, YES);
+  },
+
+  nameContains: function(query, item) {
+    var name = item.name;
     var matchAt = name.toLowerCase().indexOf(query.toLowerCase());
 
     if (matchAt !== -1) {
@@ -304,13 +356,18 @@ Docs.searchController = SC.ArrayController.create({
       nameMarkup += name.substr(matchAt + query.length);
 
       var metadata = {
-        name: name,
-        searchNameMarkup: nameMarkup
+        fullName: item.fullName,
+        name: item.name,
+        searchNameMarkup: nameMarkup,
+        searchClassNameMarkup: item.className,
+        didMatchName: YES
       };
+
 
       return metadata;
     } else {
       return false;
     }
   }
+
 });

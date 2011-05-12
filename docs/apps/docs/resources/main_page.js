@@ -53,15 +53,20 @@ Docs.mainPage = SC.Page.design({
         }),
 
         searchResultsList: SC.ScrollView.design({
-          layout: { top:35, left:0, bottom:0, right: 0 },
+          classNames: 'search-result-scroll-view'.w(),
+          layout: { top: 35, left: 0, bottom: 0, right: 0 },
           isVisibleBinding: 'Docs.searchController.isSearching',
+
 
           // the custom example view supports fast path, so we can use it and the
           // trackpad momentum scrolling works!
           contentView: Docs.MasterListView.design(SC.CollectionFastPath, {
+            classNames: 'search-result-list'.w(),
             contentBinding: 'Docs.searchController.arrangedObjects',
             selectionBinding: 'Docs.searchController.selection',
             showAlternatingRows: YES,
+
+            rowHeight: 22,
 
             exampleView: Docs.SearchResultItemView
           })
