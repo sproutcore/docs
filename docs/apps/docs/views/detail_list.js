@@ -6,12 +6,17 @@
 
 Docs.DetailListView = SC.ListView.extend({
 
-  masterPropertyPath: 'mainPage.mainPane.classList.contentView',
+  masterClassListPropertyPath: 'mainPage.mainPane.sidebar.classList.contentView',
+  masterSearchListPropertyPath: 'mainPage.mainPane.sidebar.searchResultsList.contentView',
 
   keyDown: function(evt){
 
     if(evt.keyCode === 37) {
-      var propPath = this.get('masterPropertyPath');
+      var isSearching = Docs.getPath('searchController.isSearching');
+      var propPath = isSearching ? 
+        this.get('masterSearchListPropertyPath') : 
+        this.get('masterClassListPropertyPath');
+
       var masterView = Docs.getPath(propPath);
 
       masterView.becomeFirstResponder();
