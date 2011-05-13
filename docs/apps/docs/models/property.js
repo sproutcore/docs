@@ -34,17 +34,6 @@ Docs.Property = SC.Record.extend(
   overview: SC.Record.attr(String),
   defaultValue: SC.Record.attr(String),
   isConstant: SC.Record.attr(Boolean, {defaultValue: NO}),
-  isPrivate: SC.Record.attr(Boolean, {defaultValue: NO}),
-
-  formattedOverview: function() {
-    var overview = this.get('overview');
-
-    var trimmedOverview = Docs.trimCommonLeadingWhitespace(overview);
-
-    var converter = new Showdown.converter();
-    var html = converter.makeHtml(trimmedOverview);
-
-    return html;
-  }.property('overview').cacheable()
+  isPrivate: SC.Record.attr(Boolean, {defaultValue: NO})
 
 }) ;

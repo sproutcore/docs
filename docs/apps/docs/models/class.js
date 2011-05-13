@@ -49,17 +49,5 @@ Docs.Class = SC.Record.extend(
     var augments = this.get('augments');
 
     return augments.getEach('desc');
-  }.property('augments').cacheable(),
-
-  formattedOverview: function() {
-    var overview = this.get('overview');
-
-    var trimmedOverview = Docs.trimCommonLeadingWhitespace(overview);
-
-    var converter = new Showdown.converter();
-    var html = converter.makeHtml(trimmedOverview);
-
-    return html;
-  }.property('overview').cacheable()
-
+  }.property('augments').cacheable()
 }) ;

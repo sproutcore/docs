@@ -7,10 +7,10 @@
     </div>
   {{/if}}
 
-  {{#if content.formattedOverview}}
+  {{#if content.overview}}
     <h2 class="section-header"> Overview </h2>
     <div class="overview">
-      {{{content.formattedOverview}}}
+      {{{content.overview}}}
     </div>
   {{/if}}
 
@@ -41,7 +41,7 @@
         </div>
 
         <div class="overview">
-          {{content.formattedOverview}}
+          {{{content.overview}}}
         </div>
       </div>
 
@@ -60,7 +60,7 @@
         </div>
 
         <div class="overview">
-          {{content.formattedOverview}}
+          {{{content.overview}}}
         </div>
 
         {{returns content}}

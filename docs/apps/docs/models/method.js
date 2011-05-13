@@ -65,17 +65,6 @@ Docs.Method = SC.Record.extend(
     var returnObj = returns[returns.length-1];
 
     return returnObj;
-  }.property().cacheable(),
-
-  formattedOverview: function() {
-    var overview = this.get('overview');
-
-    var trimmedOverview = Docs.trimCommonLeadingWhitespace(overview);
-
-    var converter = new Showdown.converter();
-    var html = converter.makeHtml(trimmedOverview);
-
-    return html;
-  }.property('overview').cacheable()
+  }.property().cacheable()
 
 }) ;
