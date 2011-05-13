@@ -29,14 +29,21 @@ Docs.mainPage = SC.Page.design({
 
         childViews: 'search classList searchResultsList'.w(),
 
-        search: SC.View.design({
+        search: SC.ToolbarView.design({
           layout: { top:0, left:0, height:35, right: 0 },
           classNames: 'search'.w(),
           childViews: 'searchTextField'.w(),
 
           searchTextField: SC.TextFieldView.design({
             hint: 'Search For Symbol',
-            valueBinding: 'Docs.searchController.searchQuery'
+            valueBinding: 'Docs.searchController.searchQuery',
+
+            render: function(orig, context, firstTime) {
+              if (firstTime) {
+                context.push("<div class='left'></div><div class='middle'></div><div class='right'></div>");
+              }
+              orig(context, firstTime);
+            }.enhance()
           })
         }),
 

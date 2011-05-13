@@ -1,0 +1,21 @@
+$theme.sc-text-field-view {
+  background: #ddd;
+
+  @include slices("images/search_bar.png", $left: 35, $right: 28);
+
+  &.focus {
+    @include slices("images/search_bar_focus.png", $left: 35, $right: 28);
+  }
+
+  .border {
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    -webkit-appearance: none;
+  }
+
+  .padding {
+    left: 35px;
+    right: 20px;
+  }
+}
