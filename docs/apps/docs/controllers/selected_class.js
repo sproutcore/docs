@@ -32,8 +32,8 @@ Docs.selectedClassController = SC.ObjectController.create(
     // for the next run loop
     //that.invokeLater(function(){
 
-      var methods = content.get('methods').toArray().sortProperty('name');
-      var properties = content.get('properties').toArray().sortProperty('name');
+      var methods = content.get('methods').sortProperty('name');
+      var properties = content.get('properties').sortProperty('id');
 
         that.set('symbols',properties.concat(methods));
 

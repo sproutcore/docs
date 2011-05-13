@@ -1,0 +1,5 @@
+source "http://rubygems.org"
+#gem "sproutcore", :git => "git://github.com/sproutit/sproutcore-abbot.git"
+# if you want to use a version of abbot already checked out into your system rather than the remote repository
+#gem "sproutcore", :git => "git@is-git.apple.com:sproutcore-abbot.git", :branch => 'master'
+gem "sproutcore", :path => "../../abbot"
