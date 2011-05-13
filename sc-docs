@@ -173,7 +173,7 @@ module Docs
 
       docs_app_dir = "#{base_path}/docs"
 
-      docs_build_cmd = "./bin/sc-build -r --languages=en --build-targets=docs --build=#{project_name}"
+      docs_build_cmd = "sc-build -r --languages=en --build-targets=docs --build=#{project_name}"
       deploy_cmd = "cp -nr #{base_path}/docs/tmp/build/sc_docs #{output_dir}"
 
       rm_old_build_cmd = "rm -rf #{base_path}/docs/tmp"
