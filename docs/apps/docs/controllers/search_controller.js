@@ -25,6 +25,7 @@ Docs.searchController = SC.ArrayController.create({
     var query = this.get('searchQuery');
     if (!query.length) {
       this._clearSearch();
+      return;
     }
 
     var that = this;
