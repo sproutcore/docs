@@ -1,10 +1,11 @@
 <div id="class-info">
 
-  <h1 class="class-name">{{content.displayName}}</h2>
-  <div class="class-metadata">
-    <span class="name">Extends:</span>
-    <span class="value">{{content.extendsFrom}}</span>
-  </div>
+  {{#if content.extendsFrom}}
+    <div class="class-metadata">
+      <span class="name">Extends:</span>
+      <span class="value">{{content.extendsFrom}}</span>
+    </div>
+  {{/if}}
 
   {{#if content.formattedOverview}}
     <h2 class="section-header"> Overview </h2>

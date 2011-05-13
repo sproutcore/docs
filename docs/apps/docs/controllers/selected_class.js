@@ -5,7 +5,7 @@
 // ==========================================================================
 /*globals Docs */
 
-sc_require('resources/jquery_ui');
+sc_require('system/jquery_ui');
 
 /** @class
 
@@ -61,7 +61,7 @@ Docs.selectedClassController = SC.ObjectController.create(
   },
 
   _scrollToSymbol: function($symbol){
-    var container = SC.$('.class-detail');
+    var container = SC.$('#class-info');
     var position = this._positionInContainer($symbol[0],container[0]);
 
     container.stop();
@@ -102,7 +102,7 @@ Docs.selectedClassController = SC.ObjectController.create(
   },
 
   _resolveLinkTags: function() {
-    var overviews = SC.$('.class-detail .overview');
+    var overviews = SC.$('#class-info .overview');
 
     overviews.each(function() {
       var regex = /{\@link\s+([\w.]+)}/g;
@@ -114,7 +114,7 @@ Docs.selectedClassController = SC.ObjectController.create(
   _updateDataTypeButtons: function() {
 
     var that = this;
-    var dataTypes = SC.$('.detail-view .data-type');
+    var dataTypes = SC.$('#class-info .data-type');
     var curClassName = that.getPath('content.displayName');
     var symbols = this.get('symbols');
 
