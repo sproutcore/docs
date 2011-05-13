@@ -32,9 +32,8 @@ Docs.main = function main() {
     Docs.classesController.selectObject(output.firstObject());
   }
 
-  var view = Docs.getPath('mainPage.mainPane.sidebar.classList.contentView');
-  view.becomeFirstResponder();
-
+  // focus on the search box so the user can search immediately.
+  Docs.searchController.beginSearch();
 
 } ;
 
