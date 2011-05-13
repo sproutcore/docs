@@ -1,0 +1,43 @@
+code {
+	font-family: Menlo, Monaco, Courier, monospace;
+}
+
+#mainPane #class-info {
+}
+
+pre code.syntax {
+  background: #FAFAFA;
+  border: 1px solid #B6B6B6;
+  display: block;
+  margin-bottom: 10px;
+  overflow: auto;
+  padding: 10px;
+}
+
+code.syntax .this {
+  color: #344C99;
+  font-weight: bold;
+}
+
+code.syntax .number {
+  color: #000299;
+}
+
+code.syntax .comment {
+  color: #748CAD;
+  font-style: italic;
+}
+
+code.syntax .keyword {
+  color: #1C0CFF;
+  font-weight: bold;
+}
+
+code.syntax .string {
+  color: #4D9357;
+}
+
+code.syntax .class {
+  font-weight: bold;
+}
+

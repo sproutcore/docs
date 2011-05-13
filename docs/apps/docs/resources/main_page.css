@@ -166,11 +166,5 @@
   & p {
     -webkit-margin-before: 0;
   }
-
-  & pre {
-    background: #E1EBF2;
-    padding:5px;
-    overflow:auto
-  }
 }
 
