@@ -45,6 +45,7 @@ Docs.searchController = SC.ArrayController.create({
   }.observes('selection'),
   
   _propagateSelectionChange: function(){
+    this._willPropagateSelectionChange.invalidate();
     this._willPropagateSelectionChange = NO;
 
     var item = this.getPath('selection.firstObject');
@@ -368,6 +369,24 @@ Docs.searchController = SC.ArrayController.create({
     } else {
       return false;
     }
-  }
+  },
 
+  // this focuses on the search field so the user may begin typing.
+  beginSearch: function() {
+    var view = Docs.getPath('mainPage.mainPane.sidebar.search.searchTextField');
+    view.becomeFirstResponder();
+  },
+
+  // when the user presses 'enter', they want to switch focus to the search results
+  // and select the first item.
+  selectSearchFirstItem: function() {
+    Docs.mainPage.getPath('mainPane.sidebar.searchResultsList.contentView').becomeFirstResponder();
+
+    if (this.get('firstObject')) {
+      this.selectObject(this.get('firstObject'));
+
+      // propagate selection change immediately:
+      this._propagateSelectionChange();
+    }
+  }
 });

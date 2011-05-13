@@ -34,16 +34,9 @@ Docs.mainPage = SC.Page.design({
           classNames: 'search'.w(),
           childViews: 'searchTextField'.w(),
 
-          searchTextField: SC.TextFieldView.design({
+          searchTextField: Docs.SearchFieldView.design({
             hint: 'Search For Symbol',
-            valueBinding: 'Docs.searchController.searchQuery',
-
-            render: function(orig, context, firstTime) {
-              if (firstTime) {
-                context.push("<div class='left'></div><div class='middle'></div><div class='right'></div>");
-              }
-              orig(context, firstTime);
-            }.enhance()
+            valueBinding: 'Docs.searchController.searchQuery'
           })
         }),
 
