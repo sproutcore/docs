@@ -79,13 +79,13 @@ Docs.mainPage = SC.Page.design({
 
         autoResizeStyle: SC.RESIZE_AUTOMATIC,
 
-        toolbar: SC.View.design({
-          layout: { top:0, left:0, right:0, height:50 },
+        toolbar: SC.ToolbarView.design({
+          layout: { top:0, left:0, right:0, height: 35 },
           classNames: 'class-header'.w(),
           childViews: 'className'.w(),
 
           className: SC.LabelView.design({
-            layout: { centerY:0, left:10, right:0, height:27 },
+            layout: { centerY:1, left:10, right:0, height:22 },
             classNames: 'class-name'.w(),
             valueBinding: 'Docs.selectedClassController.displayName',
             controlSize: SC.LARGE_CONTROL_SIZE
@@ -93,7 +93,7 @@ Docs.mainPage = SC.Page.design({
         }),
 
         workspace: SC.View.design({
-          layout: { top:50, left:0, bottom:0, right:0 },
+          layout: { top:35, left:0, bottom:0, right:0 },
           classNames: 'workspace'.w(),
           childViews: 'symbolList classDetails'.w(),
 

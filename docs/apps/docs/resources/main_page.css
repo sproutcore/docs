@@ -9,14 +9,15 @@
   font-family: "Helvetica Neue", "Helvetica", Verdana;
 
   & .class-header {
-    background: #e1e7ee;
-    border-bottom: 1px #a8b0ba solid;
-    z-index: 4;
+    // the search bar image also has the toolbar background...
+    @include slice('images/search_bar.png', $width: 1, $repeat: repeat-x);
 
     & .class-name {
-      font-weight:bolder;
-      font-size:25px;
+      font-weight: normal;
+      color: #777;
+      font-size:20px;
     }
+
   }
 
   & .symbol-list {
