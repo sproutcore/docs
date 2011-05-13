@@ -5,6 +5,7 @@
 // ==========================================================================
 /*globals Docs */
 sc_require('views/search_result_item_view');
+sc_require('views/main_pane');
 
 // This page describes the main user interface for your application.  
 Docs.mainPage = SC.Page.design({
@@ -12,7 +13,7 @@ Docs.mainPage = SC.Page.design({
   // The main pane is made visible on screen as soon as your app is loaded.
   // Add childViews to this pane for views to display immediately on page 
   // load.
-  mainPane: SC.MainPane.design({
+  mainPane: Docs.MainPane.design({
     layerId: 'mainPane',
     // childViews: 'sidebar detailView'.w(),
     childViews: 'splitContainer'.w(),
