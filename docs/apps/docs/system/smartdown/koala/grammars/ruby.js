@@ -1,3 +1,4 @@
+sc_require('system/smartdown/koala/lexer');
 
 // Koala - Grammars - Ruby - Copyright TJ Holowaychuk <tj@vision-media.ca> (MIT Licensed)
 

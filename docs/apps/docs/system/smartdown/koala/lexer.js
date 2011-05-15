@@ -1,3 +1,4 @@
+sc_require('system/smartdown/koala');
 
 // Koala - Lexer - Copyright TJ Holowaychuk <tj@vision-media.ca> (MIT Licensed)
 Koala.Lexer = (function() {

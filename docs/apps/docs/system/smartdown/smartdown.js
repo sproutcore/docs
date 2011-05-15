@@ -1,8 +1,8 @@
 /*global IO,Markdown,Koala,Smartdown*/
-IO.include("plugins/smartdown/markdown.js");
-IO.include("plugins/smartdown/koala.js");
+sc_require('system/smartdown/showdown');
+sc_require('system/smartdown/koala');
 
-var Smartdown = {
+Smartdown = {
   render: function(text) {
     // first, attempt to determine indent level of content.
     /**
@@ -16,7 +16,9 @@ var Smartdown = {
       text = text.replace(new RegExp("^" + initial[1], 'mg'), "");
     }
     
-    if (text.match(/\n/)) text = new Showdown.converter().makeHtml(text);
+    if (text.match(/\n/)) {
+      text = new Showdown.converter().makeHtml(text);
+    }
 
     text = text.replace(/<code>(#([^:\s]+)?)?:?\s*([^\0]+?)<\/code>/g, function(match, whitespace, lang, code) {
       lang = lang || "js";

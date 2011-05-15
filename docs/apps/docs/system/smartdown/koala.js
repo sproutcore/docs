@@ -37,10 +37,4 @@ var Koala = {
   
 };
 
-IO.include('plugins/smartdown/koala/formatter.js');
-IO.include('plugins/smartdown/koala/lexer.js');
-IO.include('plugins/smartdown/koala/formatters/html.js');
-IO.include('plugins/smartdown/koala/grammars/javascript.js');
-IO.include('plugins/smartdown/koala/grammars/ruby.js');
 
- 

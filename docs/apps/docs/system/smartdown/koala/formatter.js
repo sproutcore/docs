@@ -1,3 +1,4 @@
+sc_require('system/smartdown/koala');
 
 // Koala - Formatter - Copyright TJ Holowaychuk <tj@vision-media.ca> (MIT Licensed)
 /*global Koala*/
