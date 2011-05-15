@@ -1,0 +1,126 @@
+#mainPane #class-info {
+
+  position: absolute;
+  top:0;
+  left:190px;
+  right:0;
+  bottom:0;
+  background: white;
+  overflow:auto;
+  font-size:14px;
+  -webkit-user-select: text;
+  padding: 20px;
+  font-size:1em;
+
+  p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  & .class-name {
+    font-size:2em;
+  }
+
+  & .class-metadata {
+    margin-bottom:15px;
+
+    & .name {
+      font-weight:bolder;
+    }
+  }
+  
+  & h1 {
+    font-size: 1.5em;
+  }
+
+  & h2 {
+    color: #2b4270;
+    margin-bottom:10px;
+    font-size: 1.3em;
+  }
+
+  & hr {
+    border: none;
+    background:#a8b0ba;
+    height: 1px;
+    margin:15px 0;
+  }
+
+  & ul {
+    margin:0;
+  }
+
+  & .data-type {
+    margin-right: 2px;
+    padding:2px;
+    color: gray;
+    font-weight:bolder;
+  }
+
+  & .data-type.clickable:hover {
+    cursor: pointer;
+    text-decoration:underline !important;
+  }
+
+  & .data-type.clickable {
+    color:blue;
+    text-decoration:none;
+  }
+
+
+  & .method-signature {
+    font-weight:bolder;
+  }
+
+  & .returns {
+    margin-left: 15px;
+  }
+
+  & .returns .name {
+    /*color: gray;*/
+    font-weight:bolder;
+  }
+
+  & .subtitles {
+    color: gray;
+    margin-bottom:5px;
+    margin-left:15px;
+  }
+
+  & .subtitles .name {
+    font-weight:bolder;
+  }
+
+  & .subtitles .value {
+
+  }
+
+  & .overview {
+    margin-left:15px;
+    margin-bottom:15px;
+  }
+
+  & .header {
+    font-weight:bolder;
+    margin-bottom:10px;
+
+  }
+
+  & ul {
+    margin-left: 15px;
+    -webkit-padding-start: 0;
+  }
+
+  & li {
+    list-style: circle;
+  }
+
+  & li.symbol {
+    list-style: none;
+  }
+
+  & p {
+    -webkit-margin-before: 0;
+  }
+}
+
