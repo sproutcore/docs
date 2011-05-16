@@ -53,7 +53,7 @@ Docs.Method = SC.Record.extend(
     var simpleParams = params.map(function(item,index){
       return {
           type: item.type,
-          optiona: item.isOptional,
+          optional: item.isOptional,
           name: item.name
       };
     });

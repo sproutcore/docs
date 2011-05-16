@@ -23,11 +23,11 @@ Handlebars.registerHelper('signature', function(object) {
     param = params[i];
 
     if (param.optional) {
-      preffix = "[";
-      suffix = "]";
+      prefix = "[ ";
+      suffix = " ]";
     }
     else {
-      preffix = "";
+      prefix = "";
       suffix = "";
     }
 
@@ -35,12 +35,14 @@ Handlebars.registerHelper('signature', function(object) {
       suffix += ", ";
     }
 
+    out += '<span class="method-param-name">%@</span>'.fmt(prefix);
+
     if(param.type) {
       out += '<span class="data-type" name="%@">%@</span>'.fmt(param.type,param.type);
     }
 
     if(param.name) {
-      out += '<span class="method-param-name">%@%@</span>'.fmt(param.name,suffix);
+      out += '<span class="method-param-name">%@%@%@</span>'.fmt(param.name,suffix);
     }
   }
 
