@@ -50,4 +50,7 @@ Docs.Class = SC.Record.extend(
 
     return augments.getEach('desc');
   }.property('augments').cacheable()
+
 }) ;
+
+

@@ -1,3 +1,7 @@
+$p_padding: 15px;
+$blue_header: #2b4270;
+
+
 #mainPane #class-info {
 
   position: absolute;
@@ -8,13 +12,11 @@
   background: white;
   overflow:auto;
   font-size:14px;
-  -webkit-user-select: text;
   padding: 20px;
   font-size:1em;
 
   p {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: $p_padding;
   }
 
   & .class-name {
@@ -28,15 +30,31 @@
       font-weight:bolder;
     }
   }
-  
+
+  & #symbol-identifier {
+    font-size: 2em;
+    font-weight: bolder;
+    margin-bottom:$p_padding;
+  }
+
   & h1 {
     font-size: 1.5em;
+    font-weight: bolder;
+    margin-bottom:$p_padding;
   }
 
   & h2 {
-    color: #2b4270;
-    margin-bottom:10px;
-    font-size: 1.3em;
+    font-weight: bolder;
+    margin-bottom:$p_padding;
+    color: $blue_header;
+  }
+
+
+  & .section-header {
+    color: $blue_header;
+    margin-bottom:$p_padding;
+    font-size: 1.7em;
+    font-weight:bolder;
   }
 
   & hr {
@@ -47,7 +65,16 @@
   }
 
   & ul {
-    margin:0;
+    margin-left: 30px;
+    margin-bottom: $p_padding;
+  }
+
+  & li {
+    line-height: 1.5em;
+  }
+
+  & pre {
+    overflow: auto;
   }
 
   & .data-type {
@@ -102,25 +129,11 @@
 
   & .header {
     font-weight:bolder;
-    margin-bottom:10px;
-
-  }
-
-  & ul {
-    margin-left: 15px;
-    -webkit-padding-start: 0;
-  }
-
-  & li {
-    list-style: circle;
+    margin-bottom:$p_padding;
   }
 
   & li.symbol {
     list-style: none;
-  }
-
-  & p {
-    -webkit-margin-before: 0;
   }
 }
 

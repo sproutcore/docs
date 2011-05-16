@@ -117,11 +117,11 @@ Docs.selectedClassController = SC.ObjectController.create(
     var dataTypes = SC.$('#class-info .data-type');
     var curClassName = that.getPath('content.displayName');
     var symbols = this.get('symbols');
+    var indexHash = Docs.get('indexHash');
 
     dataTypes.each(function(index){
 
       var name = $(this).attr('name');
-      var indexHash = Docs.get('indexHash');
       var valid = NO;
 
       // Check if it's a top-level symbol
@@ -147,6 +147,8 @@ Docs.selectedClassController = SC.ObjectController.create(
             Docs.routeToSymbol({symbol: name});
           }
         });
+      } else {
+        $(this).removeClass('data-type');
       }
     });
   }

@@ -14,17 +14,8 @@
   and uses a nodejs-based jsdoc-toolkit engine to parse and generate the 
   fixtures data this app will render.
 
-  Known Issues:
-  ----
-
-  - The app currently suffers from some performance problems.
-  - The app lacks proper usage of SC.Routes to make symbols bookmarkable
-     and shareable.
-  - The app lacks an organizational feature (organize by framework)
-  - The app lacks a search feature
-
   If you encounter any other issues, please let me know (majd@sproutcore.com)
-  
+
   @extends SC.Object
 */
 Docs = SC.Application.create(

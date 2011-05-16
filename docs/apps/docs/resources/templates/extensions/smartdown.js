@@ -1,6 +1,8 @@
 Handlebars.registerHelper('smartdown', function(property) {
   if (this.getPath) {
-    return Smartdown.render(this.getPath(property));
+    var text = this.getPath(property);
+    text = Docs.trimCommonLeadingWhitespace(text);
+    return Smartdown.render(text);
   } else {
     return "";
   }
