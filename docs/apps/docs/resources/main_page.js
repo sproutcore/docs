@@ -20,7 +20,7 @@ Docs.mainPage = SC.Page.design({
 
     sidebar: SC.outlet('splitContainer.sidebar'),
     detailView: SC.outlet('splitContainer.detailView'),
-    
+
     splitContainer: SC.SplitView.design({
       childViews: 'sidebar detailView'.w(),
 
@@ -76,25 +76,12 @@ Docs.mainPage = SC.Page.design({
 
       detailView: SC.View.design(SC.SplitChild, {
         layout: { top:0, bottom:0 },
-        childViews: 'toolbar workspace'.w(),
+        childViews: 'workspace'.w(),
 
         autoResizeStyle: SC.RESIZE_AUTOMATIC,
 
-        toolbar: SC.ToolbarView.design({
-          layout: { top:0, left:0, right:0, height: 35 },
-          classNames: 'class-header'.w(),
-          childViews: 'className'.w(),
-
-          className: SC.LabelView.design({
-            layout: { centerY:1, left:10, right:0, height:22 },
-            classNames: 'class-name'.w(),
-            valueBinding: 'Docs.selectedClassController.displayName',
-            controlSize: SC.LARGE_CONTROL_SIZE
-          })
-        }),
-
         workspace: SC.View.design({
-          layout: { top:35, left:0, bottom:0, right:0 },
+          layout: { top:0, left:0, bottom:0, right:0 },
           classNames: 'workspace'.w(),
           childViews: 'symbolList classDetails'.w(),
 
@@ -110,7 +97,7 @@ Docs.mainPage = SC.Page.design({
               exampleView: SC.ListItemView.extend({
                 hasContentIcon: YES
               })
-            }) 
+            })
           }),
 
           classDetails: SC.TemplateView.design({
@@ -121,7 +108,6 @@ Docs.mainPage = SC.Page.design({
           })
         })
       })
-   
     })
   })
 });
