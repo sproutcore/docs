@@ -75,6 +75,11 @@ $blue_header: #2b4270;
 
   & pre {
     overflow: auto;
+    margin-bottom: $p_padding;
+    background: #D6EFFF;
+    padding:5px;
+    border: 1px #AFD6F0 solid;
+    line-height:1.3em;
   }
 
   & .data-type {
@@ -86,12 +91,12 @@ $blue_header: #2b4270;
 
   & .data-type.clickable:hover {
     cursor: pointer;
-    text-decoration:underline !important;
+    text-decoration:none;
   }
 
   & .data-type.clickable {
     color:blue;
-    text-decoration:none;
+    text-decoration:underline !important;
   }
 
 

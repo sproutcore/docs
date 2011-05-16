@@ -14,7 +14,7 @@ Handlebars.registerHelper('signature', function(object) {
 
   var name = method.get('name');
   var params = method.get('params');
-  var param, suffix;
+  var param, prefix, suffix;
 
   var out = '<div class="method-signature">';
   out += name + '(';
@@ -22,11 +22,17 @@ Handlebars.registerHelper('signature', function(object) {
   for(var i=0, l=params.length; i<l; i++) {
     param = params[i];
 
-    if ( i < (l-1)) {
-      suffix = ", ";
-    } 
+    if (param.optional) {
+      preffix = "[";
+      suffix = "]";
+    }
     else {
+      preffix = "";
       suffix = "";
+    }
+
+    if ( i < (l-1)) {
+      suffix += ", ";
     }
 
     if(param.type) {

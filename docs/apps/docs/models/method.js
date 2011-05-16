@@ -39,7 +39,6 @@ Docs.Method = SC.Record.extend(
   }.property('returns').cacheable(),
 
   returnText: function() {
-    console.log('returnText',this.getPath('returns'));
     return this.getPath('returns.lastObject.desc');
   }.property('returns').cacheable(),
 
@@ -52,7 +51,11 @@ Docs.Method = SC.Record.extend(
     var params = dataHash.params || [];
 
     var simpleParams = params.map(function(item,index){
-      return {type: item.type, name: item.name};
+      return {
+          type: item.type,
+          optiona: item.isOptional,
+          name: item.name
+      };
     });
 
     return simpleParams;
