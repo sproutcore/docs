@@ -8,36 +8,37 @@ A tool to generate documentation for the SproutCore framework and SproutCore pro
 Usage
 -----
 
+    gem install sc-docs
+
+*NOTE: If you are not using the latest version of SproutCore, the
+built-in sc-docs command may conflict. This has been fixed in the newest
+versions of SC.*
+
 ### Basic
 
-    sc-docs --input_dir INPUT_DIRECTORY_PATH
+    sc-docs preview --input_dir INPUT_DIRECTORY_PATH \
+        --output_dir OUTPUT_DIRECTORY_PATH
 
 This documents the specified directory and then runs a preview sc-server instance.
 
 ### Deploy
 
-    sc-docs --input_dir INPUT_DIRECTORY_PATH --deploy --project PROJECT_NAME \
+    sc-docs generate --input_dir INPUT_DIRECTORY_PATH \
         --output_dir = OUTPUT_DIRECTORY_PATH
 
-The deploy flag runs sc-build and deploys to the specified directory. If no output_dir is specified then it is deployed to `/Library/WebServer/Documents/`.
+The generate command runs sc-build and deploys to the specified directory.
 
 ### HTML Templates
 
-    sc-docs --input_dir INPUT_DIRECTORY_PATH --template TEMPLATE_PATH --html
+    sc-docs generate --input_dir INPUT_DIRECTORY_PATH \
+        --output_dir = OUTPUT_DIRECTORY_PATH \
+        --template TEMPLATE_PATH
 
-By default sc-docs assumes that you want to generate docs for the SproutCore based Doc Viewer. However, you can also generate standard HTML templates.
+
+By default sc-docs assumes that you want to generate docs for the SproutCore based Doc Viewer. However, if you pass a template it will generate a standard HTML output.
 
 Dependencies
 ------------
-
-### Gems
-
-* thor
-* child_labor
-* rack
-* thin *(optional, but recommended)*
-
-### Other
 
 * **node.js**: We use a special (much faster) version of jsdoc-toolkit that requires node.js.
 
