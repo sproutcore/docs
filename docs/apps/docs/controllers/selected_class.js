@@ -148,7 +148,7 @@ Docs.selectedClassController = SC.ObjectController.create(
           }
         });
       } else {
-        $(this).removeClass('data-type');
+        //$(this).removeClass('data-type');
       }
     });
   }
