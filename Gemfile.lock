@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sc_docs (0.0.1)
+    sc-docs (0.0.1)
       rack
       thor
 
@@ -44,5 +44,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  sc_docs!
+  sc-docs!
   sproutcore (= 1.6.0.rc.1)

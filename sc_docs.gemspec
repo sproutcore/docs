@@ -4,7 +4,7 @@ $:.unshift lib unless $:.include?(lib)
 require 'sc_docs/version'
 
 Gem::Specification.new do |s|
-  s.name        = "sc_docs"
+  s.name        = "sc-docs"
   s.version     = ScDocs::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Majd Taby", "Peter Wagenet"]
