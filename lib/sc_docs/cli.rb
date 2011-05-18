@@ -1,49 +1,9 @@
-#!/usr/bin/env ruby
+require 'thor'
+require 'child_labor'
+require 'sc_docs/server'
 
-# ==========================================================================
-# Project:   SproutCore - JavaScript Application Framework
-# Copyright: ©2008-2011 Apple Inc. All rights reserved.
-# License:   Licensed under MIT license (see license.js)
-# ==========================================================================
-
-
-begin
-  require "thor"
-  require "child_labor"
-  require "rack"
-
-rescue LoadError
-  puts <<-eos
-
-  sc-docs requires the thor, childlabor, and rack gems.
-
-  To install them, run this command:
-
-  gem install childlabor thor --no-rdoc --no-ri 
-eos
-
-  exit
-end
-
-module Docs
-  class Server < ::Rack::Server
-    def initialize(directory)
-      @directory = directory
-
-      begin
-        require 'thin'
-        super(:server => Thin, :Port => 9292)
-      rescue LoadError
-        super(:server => WEBrick, :Host => "localhost:9292")
-      end
-    end
-
-    def app
-      Rack::Directory.new(@directory)
-    end
-  end
-
-  class Generator < Thor
+module ScDocs
+  class CLI < Thor
     # --help and -h are already mapped to the help action, which is built in
 
     default_task :generate
@@ -73,7 +33,7 @@ module Docs
 
       base_path     = File.expand_path File.dirname(__FILE__)
 
-      jsdoc_path    = File.join(base_path, "jsdoc")
+      jsdoc_path    = File.expand_path("../../../vendor/jsdoc", __FILE__)
       template_path = options[:template] ?
                         File.expand_path(options[:template]) :
                         File.join(jsdoc_path, "templates", "sc_fixture")
@@ -269,4 +229,3 @@ module Docs
   end
 end
 
-Docs::Generator.start
