@@ -20,6 +20,7 @@ Docs.mainPage = SC.Page.design({
 
     sidebar: SC.outlet('splitContainer.sidebar'),
     detailView: SC.outlet('splitContainer.detailView'),
+    classList: SC.outlet('splitContainer.sidebar.classList.contentView'),
 
     splitContainer: SC.SplitView.design({
       childViews: 'sidebar symbolList detailView'.w(),
@@ -27,6 +28,7 @@ Docs.mainPage = SC.Page.design({
       sidebar: SC.View.design(SC.SplitChild, {
         layout: { top:0, bottom:0},
         size: 190,
+        minimumSize: 190,
 
         childViews: 'search classList searchResultsList'.w(),
 
@@ -75,6 +77,10 @@ Docs.mainPage = SC.Page.design({
       }),
 
       symbolList: SC.ScrollView.design(SC.SplitChild, {
+        size: 190,
+        minimumSize: 190,
+        autoResizeStyle: SC.RESIZE_MANUAL,
+
         contentView: Docs.DetailListView.design({
           classNames: 'symbol-list'.w(),
           contentBinding: 'Docs.selectedClassController.symbols',
