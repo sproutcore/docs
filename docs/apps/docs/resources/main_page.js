@@ -22,7 +22,7 @@ Docs.mainPage = SC.Page.design({
     detailView: SC.outlet('splitContainer.detailView'),
 
     splitContainer: SC.SplitView.design({
-      childViews: 'sidebar detailView'.w(),
+      childViews: 'sidebar symbolList detailView'.w(),
 
       sidebar: SC.View.design(SC.SplitChild, {
         layout: { top:0, bottom:0},
@@ -74,8 +74,20 @@ Docs.mainPage = SC.Page.design({
         })
       }),
 
+      symbolList: SC.ScrollView.design(SC.SplitChild, {
+        contentView: Docs.DetailListView.design({
+          classNames: 'symbol-list'.w(),
+          contentBinding: 'Docs.selectedClassController.symbols',
+          selectionBinding: 'Docs.selectedClassController.symbolSelection',
+          contentValueKey: 'name',
+          contentIconKey: 'icon',
+          exampleView: SC.ListItemView.extend({
+            hasContentIcon: YES
+          })
+        })
+      }),
+
       detailView: SC.View.design(SC.SplitChild, {
-        layout: { top:0, bottom:0 },
         childViews: 'workspace'.w(),
 
         autoResizeStyle: SC.RESIZE_AUTOMATIC,
@@ -83,22 +95,7 @@ Docs.mainPage = SC.Page.design({
         workspace: SC.View.design({
           layout: { top:0, left:0, bottom:0, right:0 },
           classNames: 'workspace'.w(),
-          childViews: 'symbolList classDetails'.w(),
-
-          symbolList: SC.ScrollView.design({
-            layout: { top:0, left:0, bottom:0, width:190 },
-            contentView: Docs.DetailListView.design({
-              classNames: 'symbol-list'.w(),
-              contentBinding: 'Docs.selectedClassController.symbols',
-              selectionBinding: 'Docs.selectedClassController.symbolSelection',
-              contentValueKey: 'name',
-              contentIconKey: 'icon',
-
-              exampleView: SC.ListItemView.extend({
-                hasContentIcon: YES
-              })
-            })
-          }),
+          childViews: 'classDetails'.w(),
 
           classDetails: SC.TemplateView.design({
             classNames: 'class-detail'.w(),
