@@ -7,9 +7,10 @@ module ScDocs
 
       begin
         require 'thin'
-        super(:server => Thin, :Port => 9292)
+        super(:server => ::Thin, :Port => 9292)
       rescue LoadError
-        super(:server => WEBrick, :Host => "localhost:9292")
+        require 'webrick'
+        super(:server => ::WEBrick, :Host => "localhost", :Port => 9292)
       end
     end
 

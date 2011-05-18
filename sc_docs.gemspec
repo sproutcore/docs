@@ -16,12 +16,11 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
 
   s.add_dependency "thor"
-  s.add_dependency "child_labor"
   s.add_dependency "rack"
 
   s.files              = `git ls-files`.split("\n")
   s.test_files         = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables        = %w(sc_docs)
+  s.executables        = %w(sc-docs)
   s.require_paths      = ["lib"]
 end
 
