@@ -62,6 +62,13 @@
         </div>
 
         <div class="overview">
+
+          {{#if content.isDeprecated}}
+            <span class="deprecated">
+              Deprecated
+            </span>
+          {{/if}}
+
           {{{smartdown content.overview}}}
         </div>
 

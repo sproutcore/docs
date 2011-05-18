@@ -66,12 +66,12 @@ function processIndividualClass(processedSymbolSet,symbol) {
     isNamespace: symbol.isNamespace,
     isPrivate: symbol.isPrivate,
     isStatic: symbol.isStatic,
+    isDeprecated: symbol.isDeprecated,
 
     author: symbol.author,
     see: symbol.see,
     since: symbol.since,
     version: symbol.version,
-    deprecated: symbol.deprecated,
     augments: symbol.augments,
 
     overview: symbol.classDesc,
@@ -96,12 +96,12 @@ function processIndividualClass(processedSymbolSet,symbol) {
 
       isPrivate: method.isPrivate,
       isStatic: method.isStatic,
+      isDeprecated: method.isDeprecated,
 
       author: method.author,
       see: method.see,
       since: method.since,
       version: method.version,
-      deprecated: method.deprecated,
       augments: [],
 
       overview: method.desc,
@@ -127,18 +127,19 @@ function processIndividualClass(processedSymbolSet,symbol) {
       displayName: property.alias,
       objectType: 'property',
 
+      isConstant: property.isConstant,
+      isPrivate: property.isPrivate,
+      isDeprecated: property.isDeprecated,
+
       propertyType: property.type,
       author: property.author,
       see: property.see,
       since: property.since,
       version: property.version,
-      deprecated: property.deprecated,
-      
+
       memberOf: property.memberOf,
       overview: property.desc,
       defaultValue: property.defaultValue,
-      isConstant: property.isConstant,
-      isPrivate: property.isPrivate
 
     });
   }

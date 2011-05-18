@@ -29,11 +29,10 @@ Docs.Property = SC.Record.extend(
   see: SC.Record.attr(Array, {defaultValue: []}),
   since: SC.Record.attr(String),
   version: SC.Record.attr(String),
-  deprecated: SC.Record.attr(String),
+  isDeprecated: SC.Record.attr(Boolean),
   memberOf: SC.Record.attr(String),
   overview: SC.Record.attr(String),
   defaultValue: SC.Record.attr(String),
   isConstant: SC.Record.attr(Boolean, {defaultValue: NO}),
   isPrivate: SC.Record.attr(Boolean, {defaultValue: NO})
-
 }) ;

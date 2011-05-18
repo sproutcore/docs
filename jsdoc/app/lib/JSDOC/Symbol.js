@@ -22,7 +22,7 @@ JSDOC.Symbol.prototype.init = function() {
 	this.classDesc = "";
 	this.comment = {};
 	this.defaultValue = undefined;
-	this.deprecated = "";
+	this.isDeprecated = false;
 	this.desc = "";
 	this.example = [];
 	this.exceptions = [];
@@ -218,9 +218,8 @@ JSDOC.Symbol.prototype.setTags = function() {
 	*/
 	
 	// @deprecated
-	var deprecateds = this.comment.getTag("deprecated");
-	if (deprecateds.length) {
-		this.deprecated = deprecateds.map(function($){return $.desc;}).join("\n");
+	if (this.comment.getTag("deprecated").length) {
+		this.isDeprecated = true;
 	}
 	
 	/*t:

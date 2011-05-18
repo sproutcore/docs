@@ -6,7 +6,7 @@ $blue_header: #2b4270;
 
   position: absolute;
   top:0;
-  left:190px;
+  left:0px;
   right:0;
   bottom:0;
   background: white;
@@ -83,7 +83,6 @@ $blue_header: #2b4270;
   }
 
   & .data-type {
-    margin-right: 2px;
     padding:2px;
     color: gray;
     font-weight:bolder;
@@ -97,11 +96,28 @@ $blue_header: #2b4270;
   & .data-type.clickable {
     color:blue;
     text-decoration:underline !important;
+    font-weight: normal;
   }
-
 
   & .method-signature {
     font-weight:bolder;
+  }
+
+  & .method-param-optional {
+    font-style: italic;
+    color: gray;
+  }
+
+  & .deprecated {
+    font-weight: bolder;
+    color: red;
+    margin-bottom: $p_padding;
+  }
+
+  & .symbol-details {
+    font-style: italic;
+    color: gray;
+    margin-left: 5px;
   }
 
   & .returns {
