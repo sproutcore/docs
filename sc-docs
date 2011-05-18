@@ -10,11 +10,12 @@
 begin
   require "thor"
   require "child_labor"
+  require "rack"
 
 rescue LoadError
   puts <<-eos
 
-  sc-docs requires the thor and childlabor gems.
+  sc-docs requires the thor, childlabor, and rack gems.
 
   To install them, run this command:
 
@@ -25,14 +26,27 @@ eos
 end
 
 module Docs
+  class Server < ::Rack::Server
+    def initialize(directory)
+      @directory = directory
+
+      begin
+        require 'thin'
+        super(:server => Thin, :Port => 9292)
+      rescue LoadError
+        super(:server => WEBrick, :Host => "localhost:9292")
+      end
+    end
+
+    def app
+      Rack::Directory.new(@directory)
+    end
+  end
+
   class Generator < Thor
     # --help and -h are already mapped to the help action, which is built in
 
     default_task :generate
-
-
-
-
 
 
     desc "generate", "Generates a build and deployes it to a web server"
@@ -43,6 +57,8 @@ module Docs
     method_options %w(--deploy -d) => false, :type => :boolean
     method_options %w(--project -p) => "sc_docs", :type => :string
     method_options %w(--output_dir -o) => "/Library/WebServer/Documents/", :type => :string
+    method_options %w(--template -t) => nil, :type => :string
+    method_options %w(--html -h) => false, :type => :boolean
 
     # The generate command will do the following:
     #
@@ -50,24 +66,27 @@ module Docs
     # 2) Generate a fixtures file
     # 3) Start sc-server for the doc viewer at port 4021
     def generate
-
       if not File.directory? options[:input_dir] and not File.file? options[:input_dir]
         puts "input_dir is not a valid directory or file."
         exit
       end
 
-      base_path     = "#{File.expand_path File.dirname(__FILE__)}/"
+      base_path     = File.expand_path File.dirname(__FILE__)
 
-      jsdoc_path    = base_path + "jsdoc/"
-      template_path = jsdoc_path + "templates/sc_fixture"
-      output_path   = base_path + "docs/apps/docs/fixtures/"
+      jsdoc_path    = File.join(base_path, "jsdoc")
+      template_path = options[:template] ?
+                        File.expand_path(options[:template]) :
+                        File.join(jsdoc_path, "templates", "sc_fixture")
+      output_path   = options[:html] ?
+                        File.expand_path("../tmp/docs", __FILE__) :
+                        File.join(base_path, "docs", "apps", "docs", "fixtures")
 
       input_dir     = File.expand_path(options[:input_dir])
 
       output_file   = "class.js"
       class_name    = "Docs.Class"
 
-      run_js_path   = jsdoc_path + "app/run.js"
+      run_js_path   = File.join(jsdoc_path, "app", "run.js")
 
       deploy        = options[:deploy]
       project       = options[:project]
@@ -82,6 +101,17 @@ module Docs
         exit
       end
 
+      # Prep
+      FileUtils.rm_rf output_path
+      FileUtils.mkdir_p output_path
+
+      # Copy other files to output
+      path = File.join(template_path, "output")
+      if File.directory?(path)
+        Dir["#{path}/*"].each{|p| FileUtils.cp_r(p, output_path) }
+      end
+
+      # Build command
       command = "#{run_js_path} -apsv -r=20 -t=#{template_path} #{input_dir} -d=#{output_path} -f=#{output_file} -l=#{class_name}"
 
       puts "Generating Documentation...\n\n";
@@ -120,12 +150,16 @@ module Docs
 
         perform_deploy(project, output_dir)
 
+      elsif options[:html]
+
+        Server.new(output_path).start
+
       else
 
         puts "\n------------------------------------"
         puts "Starting sc-server at port 4021..."
 
-        Dir.chdir File.expand_path("#{base_path}docs")
+        Dir.chdir File.expand_path(File.join(base_path, "docs"))
         puts `sc-server --port 4021`
 
       end
