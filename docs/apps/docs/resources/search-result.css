@@ -7,29 +7,18 @@ $theme.search-result {
   padding-top: 2px;
 
   overflow: visible;
-  .search-match, .search-begin-match {
-    border: solid 1px white;
-    box-shadow: 1px 1px 4px rgba(0,0,0,.9);
-    -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,.9);
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
 
-    padding: 1px;
+  .search-match, .search-begin-match {
     color: black;
     font-weight: bold;
-
-    background-color: orange;
-    background-image: -moz-linear-gradient(top, #f2d600, #e09e02);
-    background-image: -webkit-gradient(linear, center top, center bottom, from(#f2d600), to(#e09e02));
-
+    background-color: #F7E40F;
   }
 
   .class-name {
     font-weight: bold;
-    color: #333;
+    color: #808080;
 
     text-shadow: 0px 1px 1px rgba(255,255,255,0.8);
-
     margin-right: 5px;
 
     &.secondary {
