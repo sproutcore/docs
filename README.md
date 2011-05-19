@@ -16,23 +16,19 @@ versions of SC.*
 
 ### Basic
 
-    sc-docs preview --input_dir INPUT_DIRECTORY_PATH \
-        --output_dir OUTPUT_DIRECTORY_PATH
+    sc-docs preview INPUT_DIRECTORY_PATH
 
 This documents the specified directory and then runs a preview sc-server instance.
 
 ### Deploy
 
-    sc-docs generate --input_dir INPUT_DIRECTORY_PATH \
-        --output_dir = OUTPUT_DIRECTORY_PATH
+    sc-docs generate INPUT_DIRECTORY_PATH -o OUTPUT_DIRECTORY_PATH
 
 The generate command runs sc-build and deploys to the specified directory.
 
 ### HTML Templates
 
-    sc-docs generate --input_dir INPUT_DIRECTORY_PATH \
-        --output_dir = OUTPUT_DIRECTORY_PATH \
-        --template TEMPLATE_PATH
+    sc-docs generate INPUT_DIRECTORY_PATH -o OUTPUT_DIRECTORY_PATH -t TEMPLATE_PATH
 
 
 By default sc-docs assumes that you want to generate docs for the SproutCore based Doc Viewer. However, if you pass a template it will generate a standard HTML output.
