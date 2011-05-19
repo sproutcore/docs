@@ -30,7 +30,9 @@ Docs.main = function main() {
   SC.routes.add(':class/:symbol',Docs,'routeToSymbol');
   SC.routes.add(':class',Docs,'routeToClass');
 
-  Docs.classesController.selectObject(output.firstObject());
+  if (!window.location.hash) {
+    Docs.classesController.selectObject(output.firstObject());
+  }
 
   var view = Docs.getPath('mainPage.mainPane.classList');
   view.becomeFirstResponder();
