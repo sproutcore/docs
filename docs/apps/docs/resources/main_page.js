@@ -19,7 +19,7 @@ Docs.mainPage = SC.Page.design({
     childViews: 'splitContainer'.w(),
 
     sidebar: SC.outlet('splitContainer.sidebar'),
-    detailView: SC.outlet('splitContainer.detailView'),
+    detailView: SC.outlet('splitContainer.symbolList'),
     classList: SC.outlet('splitContainer.sidebar.classList.contentView'),
 
     splitContainer: SC.SplitView.design({
