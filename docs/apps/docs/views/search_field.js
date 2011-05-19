@@ -13,13 +13,19 @@ Docs.SearchFieldView = SC.TextFieldView.extend({
     orig(context, firstTime);
   }.enhance(),
 
-  keyDown: function(orig, evt) {
+  keyDown: function(evt) {
+
     if (evt.keyCode === SC.Event.KEY_RETURN || evt.keyCode === SC.Event.KEY_DOWN) {
       Docs.searchController.selectSearchFirstItem();
       return YES;
-    } else {
-      return orig(evt);
     }
-  }.enhance()
+    else if (evt.keyCode === SC.Event.KEY_ESC) {
+      this.set('value','');
+      return YES;
+    }
+    else {
+      return sc_super();
+    }
+  }
 });
 
