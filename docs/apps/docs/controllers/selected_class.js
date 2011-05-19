@@ -22,10 +22,12 @@ Docs.selectedClassController = SC.ObjectController.create(
   symbols: [],
   properties: [],
   methods: [],
- 
+
   _contentDidChange: function(){
     var content = this.get('content');
-    if (!content) {return;}
+    if (!content || content === this._content) {return;}
+
+    this._content = content;
 
     var that = this;
     // Give the browser a chance to render, we can wait
@@ -45,7 +47,6 @@ Docs.selectedClassController = SC.ObjectController.create(
         that._updateDataTypeButtons();
       });
     //});
-      
 
   }.observes('content'),
 
