@@ -13,8 +13,8 @@ module ScDocs
 
     attr_reader :verbose
 
-    def initialize(options={})
-      @input_dir  = File.expand_path(options[:input_dir])
+    def initialize(directory, options={})
+      @input_dir  = File.expand_path(directory)
       @output_dir = File.expand_path(options[:output_dir])
       @verbose    = options[:verbose]
     end
@@ -58,10 +58,11 @@ module ScDocs
         path = File.join(template, "output")
         if File.directory?(path)
           puts "Copying additional files" if verbose
+          # This is stupid, but necessary to copy only the contents
           Dir["#{path}/*"].each{|p| FileUtils.cp_r(p, output_dir) }
         end
       end
-      
+
       def run_server
         Server.new(output_dir).start
       end
@@ -70,7 +71,7 @@ module ScDocs
 
   class HtmlGenerator < Generator
 
-    def initialize(options={})
+    def initialize(directory, options={})
       super
       @template = File.expand_path(options[:template])
     end
@@ -80,10 +81,10 @@ module ScDocs
   class ScGenerator < Generator
 
     attr_reader :app_dir
-    
+
     attr_reader :project_name
 
-    def initialize(options={})
+    def initialize(directory, options={})
       super
       @template = File.expand_path("../templates/sc_fixture", __FILE__)
       @app_dir    = File.expand_path(options[:output_dir])
@@ -100,10 +101,10 @@ module ScDocs
     private
 
       def prep
-        target_dir = File.dirname(app_dir)
         FileUtils.rm_rf app_dir
-        FileUtils.mkdir_p target_dir
-        FileUtils.cp_r File.expand_path("../docs", __FILE__), target_dir
+        FileUtils.mkdir_p app_dir
+        # This is stupid, but necessary to copy only the contents
+        Dir[File.expand_path("../docs/*", __FILE__)].each{|f| FileUtils.cp_r f, app_dir }
       end
 
       def run_server
@@ -118,11 +119,11 @@ module ScDocs
         tmp_path = File.join(Dir.tmpdir, "docs#{rand(100000)}")
 
         FileUtils.mv app_dir, tmp_path
-        
+
         Dir.chdir tmp_path
 
         build_cmd = "sc-build -r --languages=en --build-targets=docs --build=#{project_name}"
-        
+
         puts "Deploying...\n\n"
 
         puts "#{build_cmd}\n\n" if verbose
@@ -131,15 +132,14 @@ module ScDocs
         FileUtils.rm_rf app_dir
         FileUtils.mkdir_p app_dir
 
-        docs_dir = File.join(app_dir, "sc_docs")
-        FileUtils.cp_r File.join(tmp_path, "tmp", "build", "sc_docs"), docs_dir
-        FileUtils.cp File.join(docs_dir, "docs", "en", project_name, "index.html"), docs_dir
+        FileUtils.cp_r File.join(tmp_path, "tmp", "build", "sc_docs"), app_dir
+        FileUtils.cp File.join(app_dir, "sc_docs", "docs", "en", project_name, "index.html"), app_dir
 
         puts "Deployed"
 
       ensure
         FileUtils.rm_rf tmp_path
       end
-  
+
   end
 end
