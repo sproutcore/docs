@@ -27,8 +27,8 @@ Docs.main = function main() {
   Docs.allClassesRecordArray = output;
   Docs.classesController.set('content',output);
 
-  //SC.routes.add(':class/:symbol',Docs,'routeToSymbol');
-  //SC.routes.add(':class',Docs,'routeToClass');
+  SC.routes.add(':class/:symbol',Docs,'routeToSymbol');
+  SC.routes.add(':class',Docs,'routeToClass');
 
   Docs.classesController.selectObject(output.firstObject());
 
