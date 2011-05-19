@@ -17,12 +17,14 @@ Docs.main = function main() {
 
   Docs.getPath('mainPage.mainPane').append() ;
 
-  var query  = SC.Query.local(Docs.Class);
+  var query  = SC.Query.local(Docs.Class, {
+    orderBy: 'displayName ASC'
+  });
   var output = Docs.store.find(query);
 
   Docs.buildIndex(output);
 
-  Docs.allClassesRecordArray = output = output.sortProperty('displayName');
+  Docs.allClassesRecordArray = output;
   Docs.classesController.set('content',output);
 
   //SC.routes.add(':class/:symbol',Docs,'routeToSymbol');
