@@ -209,7 +209,7 @@ module Docs
       if File.directory? input_dir and File.directory? "#{input_dir}/.git"
         Dir.chdir input_dir
         run("git fetch", print_output)
-        run("git rebase origin master", print_output)
+        run("git rebase origin/master", print_output)
       end
 
     end
