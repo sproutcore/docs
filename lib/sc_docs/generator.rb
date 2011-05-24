@@ -73,8 +73,15 @@ module ScDocs
 
     def initialize(directory, options={})
       super
-      @template = File.expand_path(options[:template])
+      @template = lookup_template(options[:template])
     end
+
+    private
+
+      def lookup_template(name)
+        path = File.expand_path("../templates/#{name}", __FILE__)
+        File.exist?(path) ? path : File.expand_path(name)
+      end
 
   end
 
