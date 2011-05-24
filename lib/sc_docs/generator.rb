@@ -11,18 +11,24 @@ module ScDocs
 
     attr_reader :template
 
+    attr_reader :smartdown
+
     attr_reader :verbose
 
     def initialize(directory, options={})
       @input_dir  = File.expand_path(directory)
       @output_dir = File.expand_path(options[:output_dir])
+      @smartdown  = false
       @verbose    = options[:verbose]
     end
 
     def command
       @command ||= begin
         run_js_path = File.expand_path("../../../vendor/jsdoc/app/run.js", __FILE__)
-        command = "#{run_js_path} -apsv -r=20 -t=\"#{template}\" \"#{input_dir}\" -d=\"#{output_dir}\" -f=class.js -l=Docs.Class"
+        command = "#{run_js_path} -a -v -r=20 -t=\"#{template}\" \"#{input_dir}\" -d=\"#{output_dir}\" "+
+                      "-f=class.js -l=Docs.Class"
+        command << " --smartdown" if smartdown
+        command
       end
     end
 
@@ -74,6 +80,7 @@ module ScDocs
     def initialize(directory, options={})
       super
       @template = lookup_template(options[:template])
+      @smartdown = true
     end
 
     private
