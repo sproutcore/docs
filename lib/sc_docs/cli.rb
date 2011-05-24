@@ -11,25 +11,26 @@ module ScDocs
       :banner => "Path to jsdoc template (forces HTML output)"
     class_option :verbose,    :aliases => ['-v'], :type => :boolean, :default => false
 
-    desc "generate DIRECTORY", "Generate docs"
+    desc "generate [DIRECTORIES...]", "Generate docs"
     method_option :output_dir, :aliases => ['-o'], :type => :string, :required => true,
       :banner => "Directory to output docs to"
     method_option :project, :aliases => ['-p'], :type => :string,
       :banner => "SproutCore Project Name"
-    def generate(directory)
-
+    def generate(*directories)
+      raise "At least one directory is required" if directories.empty?
       puts "Generating Documentation...\n\n"
-      update_repo
-      generator(directory).generate
+      update_repo(directories)
+      generator(directories).generate
     end
 
-    desc "preview DIRECTORY", "Preview docs output"
+    desc "preview [DIRECTORIES...]", "Preview docs output"
     method_option :output_dir, :aliases => ['-o'], :type => :string, :required => false,
       :banner => "Directory to output docs to (defaults to a tempfile)"
-    def preview(directory)
+    def preview(*directories)
+      raise "At least one directory is required" if directories.empty?
       puts "Building Documentation Preview...\n\n"
-      update_repo
-      with_temp_output{ generator(directory).preview }
+      update_repo(directories)
+      with_temp_output{ generator(directories).preview }
     end
 
     private
@@ -38,18 +39,20 @@ module ScDocs
         @output_dir || options[:output_dir]
       end
 
-      def generator(directory)
+      def generator(directories)
         opts = options.merge(:output_dir => output_dir)
-        (opts[:template] ? HtmlGenerator : ScGenerator).new(directory, opts)
+        (opts[:template] ? HtmlGenerator : ScGenerator).new(directories, opts)
       end
 
-      def update_repo
+      def update_repo(directories)
         return unless options[:update]
+        return unless directories.length == 1
+        directory = directories[0]
 
         puts "Updating repository...\n\n" if options[:verbose]
 
-        if File.directory? input_dir and File.directory? "#{input_dir}/.git"
-          Dir.chdir input_dir do
+        if File.directory? directory and File.directory? "#{directory}/.git"
+          Dir.chdir directory do
             run("git fetch", print_output)
             run("git rebase origin master", print_output)
           end

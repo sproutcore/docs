@@ -5,7 +5,7 @@ require 'sc_docs/server'
 module ScDocs
   class Generator
 
-    attr_reader :input_dir
+    attr_reader :input_dirs
 
     attr_reader :output_dir
 
@@ -15,8 +15,8 @@ module ScDocs
 
     attr_reader :verbose
 
-    def initialize(directory, options={})
-      @input_dir  = File.expand_path(directory)
+    def initialize(directories, options={})
+      @input_dirs = directories.map{|d| File.expand_path(d) }
       @output_dir = File.expand_path(options[:output_dir])
       @smartdown  = false
       @verbose    = options[:verbose]
@@ -25,8 +25,8 @@ module ScDocs
     def command
       @command ||= begin
         run_js_path = File.expand_path("../../../vendor/jsdoc/app/run.js", __FILE__)
-        command = "#{run_js_path} -a -v -r=20 -t=\"#{template}\" \"#{input_dir}\" -d=\"#{output_dir}\" "+
-                      "-f=class.js -l=Docs.Class"
+        command = "#{run_js_path} -a -v -r=20 -t=\"#{template}\" #{input_dirs.map{|d| %{"#{d}"} }.join(' ')} " <<
+                      "-d=\"#{output_dir}\" -f=class.js -l=Docs.Class"
         command << " --smartdown" if smartdown
         command
       end
@@ -77,7 +77,7 @@ module ScDocs
 
   class HtmlGenerator < Generator
 
-    def initialize(directory, options={})
+    def initialize(directories, options={})
       super
       @template = lookup_template(options[:template])
       @smartdown = true
@@ -98,7 +98,7 @@ module ScDocs
 
     attr_reader :project_name
 
-    def initialize(directory, options={})
+    def initialize(directories, options={})
       super
       @template = File.expand_path("../templates/sc_fixture", __FILE__)
       @app_dir    = File.expand_path(options[:output_dir])
