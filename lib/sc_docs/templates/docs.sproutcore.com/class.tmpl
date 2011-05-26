@@ -45,15 +45,28 @@
           {!
             var classType = "";
 
+            if (data.deprecated) {
+              classType += "(DEPRECATED) ";
+            }
+
             if (data.isBuiltin()) {
               classType += "Built-In ";
             }
 
             if (data.isNamespace) {
+              var srcFile = (typeof data.srcFile === 'string') ? data.srcFile : '';
+
               if (data.is('FUNCTION')) {
                 classType += "Function: ";
+              } else if (srcFile.match(/\/protocols\//)) {
+                classType += "Protocol: ";
+              } else if (srcFile.match(/\/mixins\//)) {
+                classType += "Mixin: ";
+              } else if (srcFile.match(/\/delegates\//)) {
+                classType += "Delegate: ";
+              } else {
+                classType += "Namespace: ";
               }
-              classType += "Namespace: ";
             }
             else {
               classType += "Class: ";
@@ -77,7 +90,13 @@
           </if>
           </span>
 
-          {+data.classDesc+}
+        <if test="data.deprecated">
+          <div class="deprecated">
+            {+resolveLinks(data.deprecated)+}
+          </div>
+        </if>
+
+          {+resolveLinks(data.classDesc)+}
 
           <if test="!data.isBuiltin()">{# isn't defined in any file #}
             <span class="definedin">Defined in: {+new Link().toSrc(data.srcFile)+}.</span>
