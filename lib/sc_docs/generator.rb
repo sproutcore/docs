@@ -16,7 +16,7 @@ module ScDocs
     attr_reader :verbose
 
     def initialize(directories, options={})
-      @input_dirs = directories.map{|d| File.expand_path(d) }
+      @input_dirs = directories
       @output_dir = File.expand_path(options[:output_dir])
       @smartdown  = false
       @verbose    = options[:verbose]
