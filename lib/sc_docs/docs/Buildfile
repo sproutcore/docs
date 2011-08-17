@@ -5,9 +5,6 @@
 # ==========================================================================
 
 
-# This is your Buildfile, which sets build settings for your project.
-# For example, this tells SproutCore's build tools that your requires
-# the SproutCore framework.
 config :all, :required => [:sproutcore, "sproutcore/experimental/split_view"], 
        :url_prefix => "sc_docs", :load_fixtures => true
 #config :all, :required => :sproutcore, :load_fixtures => true

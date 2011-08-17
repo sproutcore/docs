@@ -1,0 +1,1 @@
+require 'sc_docs'

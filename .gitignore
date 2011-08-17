@@ -1,6 +1,9 @@
 tmp
 .DS_Store
 .bundle
+bundle
+devbin
 bin/
 docs/apps/docs/fixtures/
 docs/frameworks/
+.bundle
