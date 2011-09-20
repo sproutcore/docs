@@ -13,5 +13,10 @@
         "css"
       ]
     }
+  },
+  "dependencies": {
+    "spade": ">= 0",
+    "sproutcore": ">= 0.pre",
+    "sproutcore-statechart": ">= 0.pre"
   }
 }

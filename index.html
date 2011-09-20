@@ -2,11 +2,35 @@
   <head>
     <link rel="stylesheet" href="assets/bpm_styles.css" type="text/css" media="screen" charset="utf-8" />
 
-    <title>docs</title>
+    <title>SproutCore Documentation</title>
   </head>
   <body>
-    <h1>Hello World</h1>
+    <header role="banner" class="banner">
+      <div class="container">
+        <div id="logo">
+          <a href="http://www.sproutcore.com"><img src="assets/img/logo.png" alt="SproutCore" /></a>
+        </div>
+
+        <nav role="navigation">
+          <ul>
+            <li><a href="http://www.sproutcore.com/about/">About</a></li>
+            <li><a href="http://guides.sproutcore.com">Guides</a></li>
+            <li class="active"><a href="/" >Docs</a></li>
+            <li><a href="http://www.sproutcore.com/community/">Community</a></li>
+            <li><a href="http://blog.sproutcore.com">Blog</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="loading"></div>
   </body>
 
   <script type="text/javascript" src="assets/bpm_libs.js"></script>
+
+  <script>
+    spade.ready(function() {
+      spade.require('docs');
+    });
+  </script>
 </html>
