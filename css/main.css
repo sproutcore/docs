@@ -1,1 +1,152 @@
-/* TODO: Add your app CSS here */
+/* Reset
+--------------------------------------------- */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Base */
+
+body {
+  background-image: url(img/pixels.png), url(img/cross.png);
+  color: #444;
+  font: 12px/1.5 "Helvetica Neue", Arial, sans-serif;
+}
+
+body.green {
+  background-color: #72CB47;
+}
+
+body.green a {
+  color: #73C44B;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+p {
+  font-size: 13px;
+  margin: 1em 0;
+}
+
+button.sc-button {
+  background-color: transparent;
+  border: 0;
+  box-sizing: content-box;
+  color: #444;
+  display: block;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.container {
+  margin: 0 auto;
+  width: 960px;
+}
+
+/* Banner
+--------------------------------------------- */
+
+header.banner {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid #000; 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.9);
+  -webkit-box-shadow: 0 1px 9px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+  -moz-box-shadow: 0 1px 9px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 1px 9px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+  height: 50px;
+  z-index: 999;
+}
+
+#logo, header.banner nav {
+  float: left;
+}
+
+#logo {
+  margin-top: 11px;
+  width: 160px;
+}
+
+header.banner nav {
+  width: 600px;
+  text-align: center;
+}
+
+header.banner nav li {
+  display: inline-block;
+  padding: 16px 15px;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+}
+
+header.banner nav li.active {
+  background: url(img/glow.png) no-repeat 50% 0;
+}
+
+header.banner nav li.disabled {
+  opacity: 0.25;
+}
+
+header.banner nav a:link,
+header.banner nav a:visited {
+  color: #fff;
+}
+
+body.green header.banner nav a:hover,
+body.green header.banner nav .active a {
+  color: #beff9d;
+}
