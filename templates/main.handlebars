@@ -1,1 +1,14 @@
-ZOMG
+<aside class="left">
+  {{view SC.TextField class="search"}}
+</aside>
+
+<section>
+  {{#swap nowShowingBinding="Docs.displayController.nowShowing"}}
+    {{#view name="index"}}
+      INDEX
+    {{/view}}
+    {{#view name="class"}}
+      CLASS
+    {{/view}}
+  {{/swap}}
+</section>
