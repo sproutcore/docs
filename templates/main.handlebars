@@ -8,7 +8,9 @@
 
     {{else}}
       {{#collection Docs.PackagesList contentBinding="Docs.packagesController" tagName="ul"}}
-        {{content.name}}
+        <h2>{{content.name}}</h2>
+
+        {{collection Docs.ClassList contentBinding="parentView.content.classes" tagName="ul"}}
       {{/collection}}
     {{/if}}
   </div>
