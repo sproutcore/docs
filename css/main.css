@@ -107,6 +107,10 @@ header.banner {
   -moz-box-shadow: 0 1px 9px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.2);
   box-shadow: 0 1px 9px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.2);
   height: 50px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
   z-index: 999;
 }
 
@@ -149,4 +153,42 @@ header.banner nav a:visited {
 body.green header.banner nav a:hover,
 body.green header.banner nav .active a {
   color: #beff9d;
+}
+
+/* Main */
+
+.main {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 50px;
+}
+
+aside.left {
+  background: #fff;
+  border-right: 1px solid #333;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 250px;
+}
+
+section {
+  background: #fff;
+  bottom: 0;
+  left: 251px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.search {
+  background-color: #eee;
+  padding: 10px;
+}
+
+.search input {
+  width: 230px;
 }
