@@ -2,6 +2,16 @@
   <div class="search">
     {{view SC.TextField type="search"}}
   </div>
+
+  <div class="list-container">
+    {{#if displayController.isSearching}}
+
+    {{else}}
+      {{#collection Docs.PackagesList contentBinding="Docs.packagesController" tagName="ul"}}
+        {{content.name}}
+      {{/collection}}
+    {{/if}}
+  </div>
 </aside>
 
 <section>
