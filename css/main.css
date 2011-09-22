@@ -166,10 +166,11 @@ body.green header.banner nav .active a {
 }
 
 aside.left {
-  background: #fff;
-  border-right: 1px solid #333;
+  background: #f4f4f4;
+  border-right: 1px solid #bbb;
   bottom: 0;
   left: 0;
+  overflow: hidden;
   position: absolute;
   top: 0;
   width: 250px;
@@ -179,6 +180,7 @@ section {
   background: #fff;
   bottom: 0;
   left: 251px;
+  padding: 30px;
   position: absolute;
   right: 0;
   top: 0;
@@ -187,7 +189,13 @@ section {
 .search {
   background-color: #eee;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+  height: 20px;
+  left: 0;
   padding: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
 }
 
 .search input {
@@ -195,28 +203,33 @@ section {
 }
 
 .list-container {
+  background-color: #f4f4f4;
   bottom: 0;
   left: 0;
   overflow-x: hidden;
   overflow-y: auto;
   position: absolute;
   right: 0;
-  top: 45px;
-}
-
-.packages h2, .packages .class {
-  font-size: 14px;
-  padding: 8px 20px;
+  top: 40px;
 }
 
 .packages h2 {
-  color: #777;
+  color: #999;
+  font-size: 11px;
+  font-weight: normal;
+  padding: 6px 10px;
+  text-transform: uppercase;
 }
 
 .packages .class {
+  color: #222;
   font-size: 12px;
+  padding: 6px 20px;
 }
 
-.packages .class:nth-child(odd) {
-  background-color: #eef3f6;
+.packages .class.is-selected {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  margin: -1px 0;
 }
