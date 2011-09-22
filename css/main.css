@@ -186,6 +186,7 @@ section {
 
 .search {
   background-color: #eee;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
   padding: 10px;
 }
 
@@ -196,8 +197,26 @@ section {
 .list-container {
   bottom: 0;
   left: 0;
+  overflow-x: hidden;
   overflow-y: auto;
   position: absolute;
   right: 0;
   top: 45px;
+}
+
+.packages h2, .packages .class {
+  font-size: 14px;
+  padding: 8px 20px;
+}
+
+.packages h2 {
+  color: #777;
+}
+
+.packages .class {
+  font-size: 12px;
+}
+
+.packages .class:nth-child(odd) {
+  background-color: #eef3f6;
 }
