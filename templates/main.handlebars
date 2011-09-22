@@ -10,7 +10,7 @@
       {{#collection Docs.PackagesList contentBinding="Docs.packagesController" tagName="ul"}}
         <h2>{{content.name}}</h2>
 
-        {{collection Docs.ClassList contentBinding="parentView.content.classes" tagName="ul"}}
+        {{collection Docs.ClassList contentBinding="parentView.content.classes" tagName="ul" itemTarget="Docs.statechart"}}
       {{/collection}}
     {{/if}}
   </div>
