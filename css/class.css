@@ -25,6 +25,7 @@
 
 .sc-view.class-info article {
   bottom: 0;
+  font-size:14px;
   left: 251px;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -33,3 +34,146 @@
   right: 0;
   top: 0;
 }
+
+.sc-view.class-info article p {
+  margin-bottom: 15px;
+}
+
+.sc-view.class-info article .class-name {
+  font-size: 2em;
+}
+
+.sc-view.class-info article .class-metadata {
+  margin-bottom:15px;
+}
+
+.sc-view.class-info article .class-metadata .name {
+  font-weight:bolder;
+}
+
+.sc-view.class-info article #symbol-identifier {
+  font-size: 2em;
+  font-weight: bolder;
+  margin-bottom: 15px;
+}
+
+.sc-view.class-info article h1 {
+  font-size: 1.5em;
+  font-weight: bolder;
+  margin-bottom: 15px;
+}
+
+.sc-view.class-info article h2 {
+  font-weight: bolder;
+  margin-bottom: 15px;
+  color: #2b4270;
+}
+
+.sc-view.class-info article .section-header {
+  color: #2b4270;
+  margin-bottom: 15px;
+  font-size: 1.7em;
+  font-weight:bolder;
+}
+
+.sc-view.class-info article  hr {
+  border: none;
+  background:#a8b0ba;
+  height: 1px;
+  margin:15px 0;
+}
+
+.sc-view.class-info article ul {
+  margin-left: 30px;
+  margin-bottom: 15px;
+}
+
+.sc-view.class-info article li {
+  line-height: 1.5em;
+}
+
+.sc-view.class-info article pre {
+  overflow: auto;
+  margin-bottom: 15px;
+  background: #D6EFFF;
+  padding:5px;
+  border: 1px #AFD6F0 solid;
+  line-height:1.3em;
+}
+
+.sc-view.class-info article .data-type {
+  padding: 2px;
+  color: gray;
+  font-weight: bolder;
+  margin-right: 5px;
+}
+
+.sc-view.class-info article .data-type.clickable:hover {
+  cursor: pointer;
+  text-decoration:none;
+}
+
+.sc-view.class-info article .data-type.clickable {
+  color: blue;
+  text-decoration:underline !important;
+  font-weight: normal;
+}
+
+.sc-view.class-info article .method-signature {
+  font-weight:bolder;
+}
+
+.sc-view.class-info article .method-param-optional {
+  font-style: italic;
+  color: gray;
+}
+
+.sc-view.class-info article .deprecated {
+  font-weight: bolder;
+  color: red;
+  margin-bottom: 15px;
+}
+
+.sc-view.class-info article .symbol-details {
+  font-style: italic;
+  color: gray;
+  margin-left: 5px;
+}
+
+.sc-view.class-info article .returns {
+  margin-left: 15px;
+}
+
+.sc-view.class-info article .returns .name {
+  /*color: gray;*/
+  font-weight:bolder;
+}
+
+.sc-view.class-info article .subtitles {
+  color: gray;
+  margin-bottom:5px;
+  margin-left:15px;
+}
+
+.sc-view.class-info article .subtitles .name {
+  font-weight:bolder;
+}
+
+.sc-view.class-info article .subtitles .value {
+
+}
+
+.sc-view.class-info article .overview {
+  margin-left:15px;
+  margin-bottom:15px;
+}
+
+.sc-view.class-info article .header {
+  font-weight:bolder;
+  margin-bottom:15px;
+}
+
+.sc-view.class-info article li.symbol {
+  list-style: none;
+}
+
