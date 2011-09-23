@@ -1,6 +1,8 @@
 
 .sc-view.class-info aside {
   background-color: #EEF3F6;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding-top: 10px;
 }
 
