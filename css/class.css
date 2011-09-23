@@ -1,4 +1,25 @@
 
+.sc-view.class-info aside {
+  background-color: #EEF3F6;
+  padding-top: 10px;
+}
+
+.sc-view.class-info aside .entity {
+  background-position: 6px 5px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  padding: 5px 5px 5px 28px;
+  text-overflow: ellipsis;
+}
+
+.sc-view.class-info aside .property {
+  background-image: url(img/property_icon.png);
+}
+
+.sc-view.class-info aside .method {
+  background-image: url(img/method_icon.png);
+}
+
 .sc-view.class-info article {
   bottom: 0;
   left: 251px;

@@ -1,5 +1,11 @@
 <aside class="left">
-  
+  {{#collection contentBinding="parentView.content.properties" classNames="properties" itemClassNames="entity property" tagName="ul"}}
+    {{content.displayName}}
+  {{/collection}}
+
+  {{#collection contentBinding="parentView.content.methods" classNames="methods" itemClassNames="entity method" tagName="ul"}}
+    {{content.displayName}}
+  {{/collection}}
 </aside>
 
 <article>
