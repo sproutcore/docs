@@ -222,6 +222,7 @@ section {
 
 .packages .class {
   color: #222;
+  cursor: pointer;
   font-size: 12px;
   padding: 6px 25px;
 }

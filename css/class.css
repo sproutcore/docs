@@ -9,6 +9,7 @@
 .sc-view.class-info aside .entity {
   background-position: 6px 5px;
   background-repeat: no-repeat;
+  cursor: pointer;
   overflow: hidden;
   padding: 5px 5px 5px 28px;
   text-overflow: ellipsis;
