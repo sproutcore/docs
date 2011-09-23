@@ -20,7 +20,7 @@
   {{/if}}
 
   {{#if content.overview}}
-    <h2 class="section-header"> Overview </h2>
+    <h2 class="section-header">Overview</h2>
     <div class="overview">
       {{{smartdown content.overview}}}
     </div>
@@ -28,7 +28,7 @@
 
   {{#if content.hasProperties}}
     <h2 class="section-header"> Properties </h2>
-    {{#collection Docs.PropertiesCollectionView itemClassNames="symbol"}}
+    {{#collection contentBinding="parentView.parentView.content.properties" itemClassNames="symbol"}}
 
       <div {{bindAttr name="content.name"}}>
         <div class="header">
@@ -64,7 +64,7 @@
 
   {{#if content.hasMethods}}
     <h2 class="section-header"> Methods </h2>
-    {{#collection Docs.MethodsCollectionView itemClassNames="symbol"}}
+    {{#collection contentBinding="parentView.parentView.content.methods" itemClassNames="symbol"}}
 
       <div {{bindAttr name="content.name"}}>
         <div class="header">
