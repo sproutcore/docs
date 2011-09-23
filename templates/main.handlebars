@@ -18,11 +18,7 @@
 
 <section>
   {{#swap nowShowingBinding="Docs.displayController.nowShowing"}}
-    {{#view name="index"}}
-      INDEX
-    {{/view}}
-    {{#view name="class"}}
-      CLASS
-    {{/view}}
+    {{view Docs.IndexView name="index"}}
+    {{view Docs.ClassView name="class" contentBinding="Docs.classController.content"}}
   {{/swap}}
 </section>

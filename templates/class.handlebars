@@ -1,0 +1,82 @@
+<div id="class-info">
+
+  <h1 id="symbol-identifier">{{content.displayName}}</h1>
+
+  {{#if content.extendsFrom}}
+    <div class="class-metadata">
+      <span class="name">Extends:</span>
+      <span class="value">{{extends content.extendsFrom}}</span>
+    </div>
+  {{/if}}
+
+  {{#if content.overview}}
+    <h2 class="section-header"> Overview </h2>
+    <div class="overview">
+      {{{smartdown content.overview}}}
+    </div>
+  {{/if}}
+
+  {{#if content.hasProperties}}
+    <h2 class="section-header"> Properties </h2>
+    {{#collection Docs.PropertiesCollectionView itemClassNames="symbol"}}
+
+      <div {{bindAttr name="content.name"}}>
+        <div class="header">
+          {{content.name}}
+        </div>
+
+        <div class="subtitles">
+          {{#if content.propertyType}}
+            <span class="type">
+              <span class="name">Type: </span>
+              <span class="data-type" {{bindAttr name="content.propertyType"}}>
+                {{content.propertyType}}
+              </span>
+            </span>
+          {{/if}}
+          {{#if content.default}}
+          <span class="default">
+            <span class="name">Default</span>: 
+            <span class="value">{{content.default}}</span>
+          </span>
+          {{/if}}
+        </div>
+
+        <div class="overview">
+          {{{smartdown content.overview}}}
+        </div>
+      </div>
+
+      <hr>
+
+    {{/collection}}
+  {{/if}}
+
+  {{#if content.hasMethods}}
+    <h2 class="section-header"> Methods </h2>
+    {{#collection Docs.MethodsCollectionView itemClassNames="symbol"}}
+
+      <div {{bindAttr name="content.name"}}>
+        <div class="header">
+          {{signature content}}
+        </div>
+
+        <div class="overview">
+
+          {{#if content.isDeprecated}}
+            <span class="deprecated">
+              Deprecated
+            </span>
+          {{/if}}
+
+          {{{smartdown content.overview}}}
+        </div>
+
+        {{returns content}}
+      </div>
+
+      <hr>
+
+    {{/collection}}
+  {{/if}}
+</div>
