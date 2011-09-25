@@ -18,6 +18,8 @@
     "spade": ">= 0",
     "sproutcore": ">= 0.pre",
     "sproutcore-statechart": ">= 0.pre",
-    "sproutcore-routing": ">= 0.pre"
+    "sproutcore-routing": ">= 0.pre",
+    "jquery": ">= 0",
+    "jquery-glow": ">= 0"
   }
 }
