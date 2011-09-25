@@ -39,6 +39,13 @@
   margin-bottom: 15px;
 }
 
+.sc-view.class-info article .overview,
+.sc-view.class-info article p {
+  font-size: 14px;
+  font-family: "ff-scala-web-1", "ff-scala-web-2", "Georgia", sans-serif;
+  max-width: 60em;
+}
+
 .sc-view.class-info article .class-name {
   font-size: 2em;
 }
@@ -90,7 +97,7 @@
   background-color: #DAEED0;
   border: 1px solid #a2d38a;
   border-radius: 3px;
-  padding: 2px 3px;
+  padding: 1px 3px;
 }
 
 .sc-view.class-info article pre {
@@ -179,3 +186,6 @@
   padding: 15px 0;
 }
 
+.sc-view.class-info article li.symbol:last-child {
+  border-bottom: 0 none;
+}
