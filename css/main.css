@@ -45,7 +45,6 @@ table {
 /* Base */
 
 body {
-  background-image: url(img/pixels.png), url(img/cross.png);
   color: #444;
   font: 12px/1.5 "Helvetica Neue", Arial, sans-serif;
 }
@@ -100,7 +99,7 @@ button.sc-button {
 --------------------------------------------- */
 
 header.banner {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #333;
   border-bottom: 1px solid #000; 
   border-bottom: 1px solid rgba(0, 0, 0, 0.9);
   -webkit-box-shadow: 0 1px 9px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.2);

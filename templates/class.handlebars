@@ -21,18 +21,18 @@
   {{#if content.overview}}
     <h2 class="section-header">Overview</h2>
     <div class="overview">
-      {{{smartdown content.overview}}}
+      {{{content.overview}}}
     </div>
   {{/if}}
 
   {{#if content.hasProperties}}
     <h2 class="section-header"> Properties </h2>
-    {{#collection Docs.ClassEntityList contentBinding="parentView.parentView.content.properties" itemClassNames="symbol"}}
 
+    {{#collection Docs.ClassEntityList contentBinding="parentView.parentView.content.properties" itemClassNames="symbol"}}
       <div {{bindAttr name="content.name"}}>
-        <div class="header">
-          {{content.name}}
-        </div>
+        {{#view SC.Button target="Docs.statechart" action="showEntity" actionContextBinding="parentView.content" classNames="header"}}
+          {{actionContext.name}}
+        {{/view}}
 
         <div class="subtitles">
           {{#if content.propertyType}}
@@ -52,23 +52,20 @@
         </div>
 
         <div class="overview">
-          {{{smartdown content.overview}}}
+          {{{content.overview}}}
         </div>
       </div>
-
-      <hr>
-
     {{/collection}}
   {{/if}}
 
   {{#if content.hasMethods}}
     <h2 class="section-header"> Methods </h2>
-    {{#collection Docs.ClassEntityList contentBinding="parentView.parentView.content.methods" itemClassNames="symbol"}}
 
+    {{#collection Docs.ClassEntityList contentBinding="parentView.parentView.content.methods" itemClassNames="symbol"}}
       <div {{bindAttr name="content.name"}}>
-        <div class="header">
-          {{signature content}}
-        </div>
+        {{#view SC.Button target="Docs.statechart" action="showEntity" actionContextBinding="parentView.content" classNames="header"}}
+          {{signature actionContext}}
+        {{/view}}
 
         <div class="overview">
 
@@ -78,14 +75,11 @@
             </span>
           {{/if}}
 
-          {{{smartdown content.overview}}}
+          {{{content.overview}}}
         </div>
 
         {{returns content}}
       </div>
-
-      <hr>
-
     {{/collection}}
   {{/if}}
 </article>

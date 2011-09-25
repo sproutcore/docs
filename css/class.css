@@ -25,7 +25,7 @@
 
 .sc-view.class-info article {
   bottom: 0;
-  font-size:14px;
+  font-size: 13px;
   left: 251px;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -64,6 +64,7 @@
 }
 
 .sc-view.class-info article h2 {
+  font-size: 15px;
   font-weight: bolder;
   margin-bottom: 15px;
   color: #2b4270;
@@ -76,13 +77,6 @@
   font-weight:bolder;
 }
 
-.sc-view.class-info article  hr {
-  border: none;
-  background:#a8b0ba;
-  height: 1px;
-  margin:15px 0;
-}
-
 .sc-view.class-info article ul {
   margin-left: 30px;
   margin-bottom: 15px;
@@ -92,12 +86,20 @@
   line-height: 1.5em;
 }
 
+.sc-view.class-info article p .syntax {
+  background-color: #DAEED0;
+  border: 1px solid #a2d38a;
+  border-radius: 3px;
+  padding: 2px 3px;
+}
+
 .sc-view.class-info article pre {
   overflow: auto;
   margin-bottom: 15px;
   background: #D6EFFF;
   padding:5px;
   border: 1px #AFD6F0 solid;
+  border-radius: 3px;
   line-height:1.3em;
 }
 
@@ -163,16 +165,17 @@
 }
 
 .sc-view.class-info article .overview {
-  font-size: 13px;
   margin-left:15px;
 }
 
 .sc-view.class-info article .header {
-  font-weight:bolder;
+  font-size: 13px;
+  font-weight: bolder;
   margin-bottom:15px;
 }
 
 .sc-view.class-info article li.symbol {
-  list-style: none;
+  border-bottom: 1px solid #a8b0ba;
+  padding: 15px 0;
 }
 
