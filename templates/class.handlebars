@@ -1,14 +1,14 @@
 <aside class="left">
-  {{#collection contentBinding="parentView.content.properties" classNames="properties" itemClassNames="entity property" tagName="ul"}}
+  {{#collection Docs.EntityList contentBinding="parentView.content.properties" classNames="properties" itemClassNames="property" itemTarget="Docs.statechart"}}
     {{content.name}}
   {{/collection}}
 
-  {{#collection contentBinding="parentView.content.methods" classNames="methods" itemClassNames="entity method" tagName="ul"}}
+  {{#collection Docs.EntityList contentBinding="parentView.content.methods" classNames="methods" itemClassNames="method" itemTarget="Docs.statechart"}}
     {{content.name}}
   {{/collection}}
 </aside>
 
-<article>
+<article id="class">
   <h1 id="symbol-identifier">{{content.displayName}}</h1>
 
   {{#if content.extendsFrom}}
@@ -27,7 +27,7 @@
 
   {{#if content.hasProperties}}
     <h2 class="section-header"> Properties </h2>
-    {{#collection contentBinding="parentView.parentView.content.properties" itemClassNames="symbol"}}
+    {{#collection Docs.ClassEntityList contentBinding="parentView.parentView.content.properties" itemClassNames="symbol"}}
 
       <div {{bindAttr name="content.name"}}>
         <div class="header">
@@ -63,7 +63,7 @@
 
   {{#if content.hasMethods}}
     <h2 class="section-header"> Methods </h2>
-    {{#collection contentBinding="parentView.parentView.content.methods" itemClassNames="symbol"}}
+    {{#collection Docs.ClassEntityList contentBinding="parentView.parentView.content.methods" itemClassNames="symbol"}}
 
       <div {{bindAttr name="content.name"}}>
         <div class="header">
