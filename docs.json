@@ -4,7 +4,8 @@
   "bpm:build": {
     "bpm_libs.js": {
       "files": [
-        "lib", "templates"
+        "lib",
+        "templates"
       ]
     },
     "bpm_styles.css": {
@@ -16,6 +17,7 @@
   "dependencies": {
     "spade": ">= 0",
     "sproutcore": ">= 0.pre",
-    "sproutcore-statechart": ">= 0.pre"
+    "sproutcore-statechart": ">= 0.pre",
+    "sproutcore-routing": ">= 0.pre"
   }
 }
