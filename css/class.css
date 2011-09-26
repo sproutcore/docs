@@ -71,6 +71,7 @@
 }
 
 .sc-view.class-info article h2 {
+  font-family: "Helvetica Neue", Arial, sans-serif;
   font-size: 15px;
   font-weight: bolder;
   margin-bottom: 15px;
@@ -97,10 +98,12 @@
   background-color: #DAEED0;
   border: 1px solid #a2d38a;
   border-radius: 3px;
+  font-family: monospace;
   padding: 1px 3px;
 }
 
 .sc-view.class-info article pre {
+  font-family: monospace;
   overflow: auto;
   margin-bottom: 15px;
   background: #D6EFFF;
