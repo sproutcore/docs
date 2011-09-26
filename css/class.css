@@ -42,7 +42,6 @@
 .sc-view.class-info article .overview,
 .sc-view.class-info article p {
   font-size: 14px;
-  font-family: "ff-scala-web-1", "ff-scala-web-2", "Georgia", sans-serif;
   max-width: 60em;
 }
 
@@ -71,7 +70,6 @@
 }
 
 .sc-view.class-info article h2 {
-  font-family: "Helvetica Neue", Arial, sans-serif;
   font-size: 15px;
   font-weight: bolder;
   margin-bottom: 15px;
@@ -86,8 +84,7 @@
 }
 
 .sc-view.class-info article ul {
-  margin-left: 30px;
-  margin-bottom: 15px;
+  margin: 0 0 15px;
 }
 
 .sc-view.class-info article li {
@@ -95,11 +92,8 @@
 }
 
 .sc-view.class-info article p .syntax {
-  background-color: #DAEED0;
-  border: 1px solid #a2d38a;
-  border-radius: 3px;
+  color: #111;
   font-family: monospace;
-  padding: 1px 3px;
 }
 
 .sc-view.class-info article pre {
@@ -128,6 +122,10 @@
   color: blue;
   text-decoration:underline !important;
   font-weight: normal;
+}
+
+#class .symbol .header {
+  padding-left: 0;
 }
 
 .sc-view.class-info article .method-signature {
@@ -161,7 +159,6 @@
 }
 
 .sc-view.class-info article .subtitles {
-  color: gray;
   margin-bottom:5px;
   margin-left:15px;
 }
