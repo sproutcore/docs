@@ -9,7 +9,7 @@
 
 // load the node.js libraries to be abstracted
 var fs = require('fs');
-var Script = process.binding('evals').Script;
+var Script = process.binding('evals').NodeScript;
 
 // define a few globals to be compatible with jsrun.jar
 global.arguments = process.argv.slice(2);
