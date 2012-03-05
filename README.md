@@ -1,6 +1,29 @@
 SproutCore Documentation Generator
 ==================================
 
+
+## NOTE Tyler Keating
+
+I had a terrible time getting the docs to build.  I had to patch jsdoc, replacing
+"var Script = process.binding('evals').Script;" with "var vm = require('vm');" and
+"Script.runInThisContext(fs.readFileSync(file), file);" with
+"vm.runInThisContext(fs.readFileSync(file), file);" in the installed jsdoc run.js
+file.
+
+Previewed the docs with:
+
+bin/sc-docs preview ../SproutCore-Debug.git/frameworks/sproutcore/ -t lib/sc_docs/templates/docs.sproutcore.com/
+
+Built the docs with:
+
+bin/sc-docs generate ../SproutCore-Debug.git/frameworks/sproutcore -o output -t lib/sc_docs/templates/docs.sproutcore.com/
+
+And then copied the output into my clone of git@github.com:sproutcore-docs/sproutcore-docs.github.com.git
+It's important not to build directly into the build repo working copy, because
+sc-docs removes the contents of the output directory before building.
+
+
+
 A tool to generate documentation for the SproutCore framework and SproutCore projects, using the JSDoc format.
 
 **Authors**: Majd Taby, Peter Wagenet
