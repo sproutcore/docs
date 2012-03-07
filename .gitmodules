@@ -1,3 +1,3 @@
-[submodule "docs/frameworks/sproutcore"]
-	path = docs/frameworks/sproutcore
-  url = git://github.com/sproutcore/sproutcore.git
+[submodule "frameworks/sproutcore"]
+	path = frameworks/sproutcore
+	url = git://github.com:sproutcore/sproutcore.git
