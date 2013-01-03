@@ -87,7 +87,7 @@ header[role="banner"] {
 	height: 50px;
   position: fixed;
   overflow: hidden;
-  border-bottom: 1px solid #000; 
+  border-bottom: 1px solid #000;
   border-bottom: 1px solid rgba(0, 0, 0, 0.9);
   z-index: 999;
   background: rgba(0, 0, 0) url(../img/cross.png);
@@ -212,7 +212,7 @@ a:visited {
 /* API Docs */
 #docs section {
   border: 0;
-  
+
 }
 
 #docs #list {
@@ -312,7 +312,7 @@ section#list header {
 #docs footer {
   position:fixed;
 	width: 274px;
-  bottom:0; 
+  bottom:0;
 	background:#ddd;
   height: 45px;
   border-top: 1px solid #b2b2b2;
@@ -340,7 +340,7 @@ section#list header {
   background: #fff url(/img/apidocs.png) no-repeat 31px 31px;
   padding: 25px 57px 0px 65px;
   border-left: 1px solid #B2B2B2;
-} 
+}
 .classes {
   float: left;
   width: 40%;
@@ -389,7 +389,7 @@ a, a:visited {
   font-size: 16px;
 }
 .description {
-  margin-bottom: 8px;
+  margin: 4px 0px 8px 6px;
 }
 dt.heading {
   float: none;
@@ -412,7 +412,7 @@ dd {
   margin-left: 10px;
 }
 .parameters, .returns, .inheritsList, .detailList{
-  padding: 20px;
+  padding: 10px;
   border: 1px solid #D7E3D1;
   background-color: #F0F6EC;
   margin: 10px 0 10px 0;
@@ -423,8 +423,8 @@ dd {
 }
 .definedin,.extends {
   font-style: italic;
-  display: block;
-  margin: 10px 0;
+  /*display: block;
+  margin: 10px 0;*/
 }
 .definedin a, .extends a {
   font-style: normal;
@@ -443,21 +443,6 @@ dd {
 #documentation ol li , #documentation ul li {
   margin-left: 18px;
   margin-top: 10px;
-}
-code {
-/*   padding: 3px;*/
-/*   color: #fff;*/
-/*   background: #000;*/
-  background: rgba(0, 0, 0, 0.75);
-/*   -webkit-border-radius: 4px;*/
-/*   -moz-border-radius: 4px;*/
-/*   border-radius: 4px;*/
-/*   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 1px 4px #000;*/
-/*   -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 1px 4px #000;*/
-/*   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 1px 4px #000;*/
-/*   white-space: pre;*/
-/*   white-space: pre-wrap;*/
-/*   word-wrap: break-word;*/
 }
 /* Buttons */
 
@@ -593,26 +578,31 @@ pre {
   padding: 12px;
   color: #fff;
   background: #000;
-  background: rgba(0, 0, 0, 0.75);
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 1px 4px #000;
   -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 1px 4px #000;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 1px 4px #000;
-  white-space: pre;
+  overflow: auto;
+  /*white-space: pre;
   white-space: pre-wrap;
-  word-wrap: break-word;
+  word-wrap: break-word;*/
 }
 
-pre code { background: none; }
-pre code, code { color: #fff;}
+code.syntax {
+  border: 1px solid rgb(228, 239, 243);
+  background-color: rgb(245, 249, 250);
+  border-radius: 5px;
+  padding: 0 3px;
+}
+
+pre code, pre code.syntax { background: none; color: #fff; border: none; padding: 0px; }
 pre code .comment, code .comment { color: #726D73; }
 pre code .const, pre.code .constant, code .const { color: #585CF6; }
 pre code .symbol , code .symbol { color: #C5060B; }
-pre code .class, pre code .number, code .number { color: #DA7E64; }
+pre code .class, pre code .number, code .number, code .class { color: #DA7E64; }
 pre code .variable, pre code .this, code .variable { color: #889AB3; }
 pre code .string , code .string { color: #A0AB82; }
 pre code .keyword , code .keyword{ color: #D7B583; }
 pre code .regexp code .regexp { color: #EEC981; }
-
