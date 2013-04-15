@@ -296,12 +296,13 @@ section#list header {
   position: absolute;
   top: 50px;
   bottom: 0;
-  left: 274px;
+  left: 275px;
   right: 0;
   padding-left: 20px;
   padding-right: 30px;
   overflow: auto;
 }
+
 #docs div[role="main"] {
   padding-top: 0;
   height: 100%;
@@ -337,9 +338,8 @@ section#list header {
   font-size: 24px;
   margin: 0 0 20px -20px;
   border: 1px 0 0 solid #D7E3D1;
-  background: #fff url(/img/apidocs.png) no-repeat 31px 31px;
+  background: transparent url(/img/apidocs.png) no-repeat 31px 31px;
   padding: 25px 57px 0px 65px;
-  border-left: 1px solid #B2B2B2;
 }
 .classes {
   float: left;
@@ -350,15 +350,16 @@ section#list header {
   margin-top: 15px;
   margin-bottom: 0;
 }
+
 #documentation h2 {
-  width: 40%;
-  font-size: 18px;
-  margin-top: 25px;
+  font-size: 16px;
+  margin: 10px 0px;
+  border-bottom: 1px solid #B3B3B3;
 }
 #documentation h3 {
   font-size: 14px;
   font-weight: bold;
-  margin: 10px 0;
+  margin: 5px 0;
 }
 #documentation h2 a{
   color: #62C439;
@@ -378,8 +379,8 @@ h2 {
 }
 .methods , #properties ul{
   list-style-image: url(/img/docbullet.png);
-  margin-left: 20px;
-  margin-bottom: 20px;
+  margin-left: 12px;
+  margin-bottom: 12px;
 }
 a, a:visited {
  color: #4AA021;
@@ -388,13 +389,43 @@ a, a:visited {
   font-weight: bold;
   font-size: 16px;
 }
-.description {
-  margin: 4px 0px 8px 6px;
+.field-summary-deprecated {
+  font-style: italic;
+  color: #949494;
 }
-dt.heading {
-  float: none;
-  font-weight: bold;
+
+section.detail h1 {
+  border-bottom: 1px solid #B2B2B2;
+  font-size: 22px;
+}
+
+.field-type {
   font-size: 14px;
+}
+
+.field-content, .method-content {
+  margin: 4px 0px 8px 12px;
+}
+
+.description {
+  margin: 4px 0px 8px 0px;
+}
+
+.field-deprecated, .method-deprecated {
+  color: #F33;
+  float: right;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.method-arguments {
+
+}
+
+dt.heading {
+  /*float: none;
+  font-size: 14px;*/
+  font-weight: bold;
   background-image: none;
   padding-left: 0;
 }
@@ -441,8 +472,8 @@ dd {
 
 }
 #documentation ol li , #documentation ul li {
-  margin-left: 18px;
-  margin-top: 10px;
+  margin-left: 12px;
+  margin-top: 4px;
 }
 /* Buttons */
 
@@ -575,6 +606,7 @@ samp {
 }
 
 pre {
+  margin: 0 12px;
   padding: 12px;
   color: #fff;
   background: #000;
