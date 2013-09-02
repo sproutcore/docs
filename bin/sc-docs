@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'sc_docs/cli'
-
-ScDocs::CLI.start

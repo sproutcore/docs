@@ -10,13 +10,24 @@ I had a terrible time getting the docs to build.  I had to patch jsdoc, replacin
 "vm.runInThisContext(fs.readFileSync(file), file);" in the installed jsdoc run.js
 file.
 
+NOTE: If you install it from RubyGems it will not work. To install the gem, you 
+should build it locally:
+
+$ gem build sc_docs.gemspec
+
+and then install it:
+
+$ gem install sc-docs-0.0.3.gem 
+
+
+
 Previewed the docs with:
 
-bin/sc-docs preview frameworks/sproutcore -t lib/sc_docs/templates/docs.sproutcore.com/
+sc-docs preview frameworks/sproutcore -t lib/sc_docs/templates/docs.sproutcore.com/
 
 Built the docs with:
 
-bin/sc-docs generate frameworks/sproutcore -o output -t lib/sc_docs/templates/docs.sproutcore.com/
+sc-docs generate frameworks/sproutcore -o output -t lib/sc_docs/templates/docs.sproutcore.com/
 
 And then copied the output into my clone of git@github.com:sproutcore-docs/sproutcore-docs.github.com.git
 It's important not to build directly into the build repo working copy, because

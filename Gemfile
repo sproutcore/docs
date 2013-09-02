@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 
-gemspec
+# gemspec
 
-# gem "sproutcore", "1.6.0.rc.2"
-
+# gem "sproutcore", "1.10.0.rc.1"
 gem 'sproutcore', :git => 'https://github.com/sproutcore/abbot.git'
