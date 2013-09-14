@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>SproutCore</title>
+  <title>{+data.alias+}</title>
   <meta name="description" content="A framework for building fast, desktop caliber web applications." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/api.css" />
@@ -27,10 +27,6 @@
               classType += "(DEPRECATED) ";
             }
 
-            if (data.isBuiltin()) {
-              classType += "Built-In ";
-            }
-
             if (data.isNamespace) {
               var srcFile = (typeof data.srcFile === 'string') ? data.srcFile : '';
 
@@ -44,6 +40,8 @@
                 classType += "Delegate: ";
               } else if (data.isSingleton) {
                 classType += "Singleton: ";
+              } else if (data.isBuiltin()) {
+                classType += "Built-In: ";
               } else {
                 classType += "Namespace: ";
               }
@@ -80,7 +78,7 @@
 
         <p>
           <if test="!data.isBuiltin()">{# isn't defined in any file #}
-            <span class="definedin">Defined in: {+new Link().toSrc(data.srcFile)+}</span>
+            <span class="definedin">Defined in: {+new Link().toSrc(data.useSrcPath)+}</span>
           </if>
         </p>
 
@@ -174,6 +172,27 @@
           </ul>
         </if>
       </for>
+
+      <if test="data.inheritsFrom.length">
+      {!
+        var borrowedMembers = data.methods.filter(function($) {return $.memberOf != data.alias}),
+            contributors = [];
+        borrowedMembers.map(function($) { if (contributors.indexOf($.memberOf) === -1) contributors.push($.memberOf) });
+      !}
+        <if test="contributors.length">
+          <dl class="inheritsList">
+          <for each="contributor" in="contributors">
+            <dt>Methods borrowed from {+new Link().toSymbol(contributor)+}: </dt>
+            <dd>{+ borrowedMembers.filter(function($) { return $.memberOf == contributor })
+                    .sort(makeSortby("name"))
+                    .map(function($) { return new Link().toSymbol($.alias).withText($.name) })
+                    .join(", ") +}</dd>
+          </for>
+          </dl>
+        </if>
+      </if>
+
+
 <!-- ============================== events summary ======================== -->
       <if test="data.events.length">
         {! var ownEvents = data.events.filter(function($){return $.memberOf == data.alias && !$.isNamespace}).sort(makeSortby("name")); !}
@@ -215,6 +234,7 @@
         </h1>
         <for each="member" in="ownProperties">
           <a name="{+Link.symbolNameToLinkName(member)+}"> </a>
+          <a name='//apple_ref/cpp/Property/{+member.name+}' class='dashAnchor'> </a>
           <!-- If the field is deprecated. -->
           <if test="member.deprecated"><div class="field-deprecated">Deprecated: {+ member.deprecated +}</div></if>
           <span class="property"><if test="member.isStatic && member.memberOf != '_global_'"><span class="light">{+member.memberOf+}.</span></if><b>{+member.name+}</b></span>
@@ -230,7 +250,7 @@
               {+resolveLinks(member.desc)+}
               <if test="member.srcFile != data.srcFile">
                 <br />
-                <span class="definedin">Defined in: </span> {+new Link().toSrc(member.srcFile)+}.
+                <span class="definedin">Defined in: </span> {+new Link().toSrc(member.useSrcPath)+}.
               </if>
               <if test="member.author"><br /><i>Author: </i>{+member.author+}.</if>
             </div>
@@ -275,6 +295,7 @@
           <h1>{+name+} Method Detail</h1>
           <for each="member" in="methods">
             <a name="{+Link.symbolNameToLinkName(member)+}"> </a>
+            <a name='//apple_ref/cpp/Method/{+member.name+}' class='dashAnchor'> </a>
             <div class="fixedFont">
               <!-- If the method is deprecated. -->
               <if test="member.deprecated"><div class="method-deprecated">Deprecated: {+ member.deprecated +}</div></if>
@@ -286,7 +307,7 @@
                 {+resolveLinks(member.desc)+}
                 <if test="member.srcFile != data.srcFile">
                   <br />
-                  <span class="definedin">Defined in: {+new Link().toSrc(member.srcFile)+}.</span>
+                  <span class="definedin">Defined in: {+new Link().toSrc(member.useSrcPath)+}.</span>
                 </if>
                 <if test="member.author"><br /><i>Author: </i>{+member.author+}.</if>
               </div>
@@ -362,6 +383,7 @@
         </h1>
         <for each="member" in="ownEvents">
           <a name="event:{+Link.symbolNameToLinkName(member)+}"> </a>
+          <a name='//apple_ref/cpp/Event/{+member.name+}' class='dashAnchor'> </a>
           <div class="fixedFont">
             <if test="member.type"><span class="light">{+new Link().toSymbol(member.type)+}</span></if>
             <if test="member.isStatic && member.memberOf != '_global_'"><span class="light">{+member.memberOf+}.</span></if><b>{+member.name+}</b>{+makeSignature(member.params)+}
@@ -370,7 +392,7 @@
             {+resolveLinks(member.desc)+}
             <if test="member.srcFile != data.srcFile">
               <br />
-              <span class="definedin">Defined in:  {+new Link().toSrc(member.srcFile)+}.</span>
+              <span class="definedin">Defined in:  {+new Link().toSrc(member.useSrcPath)+}.</span>
             </if>
             <if test="member.author"><br /><i>Author: </i>{+member.author+}.</if>
           </div>
