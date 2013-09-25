@@ -10,6 +10,7 @@
 // load the node.js libraries to be abstracted
 var fs = require('fs');
 var vm = require('vm');
+var exec = require('child_process').exec;
 // var Script = process.binding('evals').Script || require('vm').Script;
 // var Script = process.binding('evals').Script;
 
@@ -134,6 +135,10 @@ SYS.slash = "/";
  */
 SYS.pwd = __dirname+SYS.slash;
 
+/**
+ * An entry point to execute external processes
+ */
+SYS.exec = exec;
 
 /**
  * @namespace A collection of functions that deal with reading a writing to disk.
