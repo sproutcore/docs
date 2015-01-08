@@ -91,11 +91,11 @@
           </if>
           </span>
 
-        <if test="data.deprecated">
-          <div class="deprecated">
-            {+resolveLinks(data.deprecated)+}
-          </div>
-        </if>
+          <if test="data.deprecated">
+            <div class="deprecated">
+              {+resolveLinks(data.deprecated)+}
+            </div>
+          </if>
         </p>
 
           {+resolveLinks(data.classDesc)+}
@@ -239,13 +239,16 @@
           <a name="{+Link.symbolNameToLinkName(member)+}"> </a>
           <!-- If the field is deprecated. -->
           <if test="member.deprecated"><div class="field-deprecated">Deprecated: {+ member.deprecated +}</div></if>
+
+          <!-- If the field is readonly. -->
+          <if test="member.isReadonly"><div class="field-readonly">Read Only</div></if>
+
           <span class="property"><if test="member.isStatic && member.memberOf != '_global_'"><span class="light">{+member.memberOf+}.</span></if><b>{+member.name+}</b></span>
 
           <!-- The type of field -->
           <if test="member.type"><span class="light field-type">{+new Link().toSymbol(member.type)+}</span></if>
 
           <!-- If the field is readonly. -->
-          <if test="member.isReadonly"><div class="field-readonly">Read Only</div></if>
 
           <div class="field-content">
             <div class="description">

@@ -418,6 +418,17 @@ section.detail h1 {
   font-style: italic;
 }
 
+.field-readonly {
+  color: #8E8E8E;
+  float: right;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: rgb(239, 239, 239);
+  display: inline-block;
+  border-radius: 7px;
+  padding: 2px 6px;
+}
+
 .method-arguments {
 
 }
