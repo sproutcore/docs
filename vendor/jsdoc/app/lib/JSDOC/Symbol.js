@@ -29,7 +29,7 @@ JSDOC.Symbol.prototype.init = function() {
 	this.fires = [];
 	this.id = JSDOC.Symbol.count++;
 	this.inherits = [];
-	this.inheritsFrom = [];
+	this.implements = [];
 	this.isa = "OBJECT";
 	this.isConstant = false;
 	this.isEvent = false;
@@ -290,10 +290,25 @@ JSDOC.Symbol.prototype.setTags = function() {
 		this.isNamespace = true;
 	}
 
+
 	/*t:
 		var sym = new JSDOC.Symbol("foo", [], "OBJECT", new JSDOC.DocComment("/**@namespace This describes the namespace.*"+"/"));
 		is(sym.classDesc, "This describes the namespace.", "@namespace tag, class description is found.");
 	*/
+
+	// @protocol
+	var protocols = this.comment.getTag("protocol");
+	if (protocols.length) {
+		this.classDesc = protocols[0].desc;
+		this.isProtocol = true;
+	}
+
+	/*t:
+		var sym = new JSDOC.Symbol("foo", [], "OBJECT", new JSDOC.DocComment("/**@protocol This describes the protocol.*"+"/"));
+		is(sym.isa, "CONSTRUCTOR", "@protocol tag, makes symbol a protocol.");
+		is(sym.protocolDesc, "This describes the protocol.", "@class tag, class description is found.");
+	*/
+
 
 	// @singleton
 	var singletons = this.comment.getTag("singleton");
@@ -543,6 +558,34 @@ JSDOC.Symbol.prototype.setTags = function() {
 				}
 			}
 			this.inherits.push({alias: inAlias, as: inAs});
+		}
+	}
+
+
+	// @implements ... as ...
+	var impls = this.comment.getTag("implements");
+	if (impls.length) {
+		for (var i = 0; i < impls.length; i++) {
+			if (/^\s*([a-z$0-9_.#:-]+)(?:\s+as\s+([a-z$0-9_.#:-]+))?/i.test(impls[i].desc)) {
+				var inAlias = RegExp.$1;
+				var inAs = RegExp.$2 || inAlias;
+
+				if (inAlias) inAlias = inAlias.replace(/\.prototype\.?/g, "#");
+
+				if (inAs) {
+					inAs = inAs.replace(/\.prototype\.?/g, "#");
+					inAs = inAs.replace(/^this\.?/, "#");
+				}
+
+				if (inAs.indexOf(inAlias) != 0) { //not a full namepath
+					var joiner = ".";
+					if (this.alias.charAt(this.alias.length-1) == "#" || inAs.charAt(0) == "#") {
+						joiner = "";
+					}
+					inAs = this.alias + joiner + inAs;
+				}
+			}
+			this.implements.push({alias: inAlias, as: inAs});
 		}
 	}
 

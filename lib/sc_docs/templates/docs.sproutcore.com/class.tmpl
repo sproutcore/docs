@@ -72,7 +72,18 @@
             } else {
               classType += "Class: ";
             }
+
+            /**var protocols = "";
+            if (data.implements.length) {
+              protocols = data.implements.sort()
+                .map(
+                  function($) { return new Link().toSymbol($); }
+                ).join(', ');
+
+              protocols = "&lt;" + protocols + "&gt;";
+            }*/
           !}
+
           {+classType+}{+data.alias+}
         </h1>
 

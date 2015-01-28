@@ -55,6 +55,11 @@ body {
   color: #444;
   font: 12px/1.5 "Helvetica Neue", Arial, sans-serif;
 }
+
+em {
+  font-style: italic;
+}
+
 .container {
   width: 960px;
   margin: 0 auto;
